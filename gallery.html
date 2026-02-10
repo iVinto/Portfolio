@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinto's Portfolio</title>
+  <meta name="description" content="Concert photography by Vinto.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="controls-top">
+    <button id="portfolioButton" onclick="goToPage('index.html')">Portfolio</button>
+    <button id="aboutButton" onclick="toggleOverlay()">About</button>
+    <button id="indexButton" onclick="showGrid()">Index</button>
+  </div>
+
+  <div class="gallery-grid"></div>
+
+  <div class="fullscreen">
+    <img src="" alt="Fullscreen Image">
+  </div>
+
+  <div class="controls-bottom">
+    <button id="whiteButton" onclick="changeBackgroundColor('#fff')">White Background</button>
+    <button id="blackButton" onclick="changeBackgroundColor('#000')">Black Background</button>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="content">
+      <div class="about-title" id="aboutTitle"></div>
+      <div class="about-description" id="aboutDescription"></div>
+      <div class="about-detail" id="aboutDate"></div>
+      <div class="about-detail" id="aboutLocation"></div>
+    </div>
+  </div>
+
+  <script src="events.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>

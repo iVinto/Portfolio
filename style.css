@@ -1,0 +1,326 @@
+/* ========================
+   SHARED STYLES
+   ======================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ========================
+   INDEX PAGE
+   ======================== */
+
+.index-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.filters-container {
+  padding: 2.5rem;
+  padding-top: 2.5rem;
+  flex: 1;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.filters button {
+  flex-shrink: 0;
+  border-radius: 0;
+  border: 1px solid black;
+  padding: 0.5rem 1.25rem;
+  background-color: white;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.filters button:hover,
+.filters button:focus,
+.filters button.active {
+  text-decoration: underline;
+  background-color: black;
+  text-decoration-color: white;
+  color: white;
+}
+
+.table-container {
+  padding: 2.5rem;
+  padding-left: 0;
+  width: 50%;
+  flex-shrink: 0;
+}
+
+#eventsTable {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 16px;
+}
+
+#eventsTable th,
+#eventsTable td {
+  padding: 0.5rem;
+  text-align: left;
+  border: none;
+}
+
+#eventsTable thead {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#eventsTable th.sortable {
+  cursor: pointer;
+}
+
+#eventsTable th.sortable:hover {
+  text-decoration: underline;
+}
+
+.year-column {
+  width: 6.5rem;
+}
+
+#eventsTable tbody tr {
+  cursor: pointer;
+}
+
+#eventsTable tbody tr:hover {
+  background-color: yellow;
+  text-decoration: underline;
+}
+
+#hoverImage {
+  position: fixed;
+  pointer-events: none;
+  display: none;
+  z-index: 1000;
+  height: 400px;
+}
+
+.index-footer {
+  padding: 2.5rem;
+  text-align: left;
+  font-size: 14px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+}
+
+.index-footer .brand {
+  color: black;
+  font-size: 54px;
+  font-family: Arial;
+  letter-spacing: -5.8px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.index-footer a {
+  margin-right: 0.75rem;
+}
+
+/* ========================
+   GALLERY PAGE
+   ======================== */
+
+.gallery-grid {
+  display: grid;
+  gap: 1.25rem;
+  padding: 3.75rem 2.5rem;
+  align-items: end;
+}
+
+.gallery-grid img {
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.fullscreen {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: inherit;
+  z-index: 2;
+}
+
+.fullscreen img {
+  max-width: 80%;
+  max-height: 80%;
+  position: absolute;
+}
+
+.controls-top {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 3.75rem;
+}
+
+.controls-bottom {
+  position: fixed;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 3.75rem;
+}
+
+.controls-top button,
+.controls-bottom button {
+  margin: 0.25rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.controls-top button.selected::before,
+.controls-bottom button.selected::before {
+  content: '[•] ';
+}
+
+.controls-top button.unselected::before,
+.controls-bottom button.unselected::before {
+  content: '[ ] ';
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.overlay.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.overlay .content {
+  text-align: left;
+  font-size: 24px;
+  color: inherit;
+}
+
+.overlay .about-title {
+  font-size: 20px;
+}
+
+.overlay .about-description {
+  font-size: 16px;
+  padding-top: 0.75rem;
+  padding-bottom: 2.5em;
+}
+
+.overlay .about-detail {
+  text-align: right;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+@media (max-width: 1024px) {
+  .index-container {
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  .filters-container {
+    padding: 1.5rem;
+  }
+
+  .table-container {
+    width: 100%;
+    padding: 0 1.5rem 6rem;
+  }
+
+  #hoverImage {
+    display: none !important;
+  }
+
+  .index-footer {
+    padding: 1.5rem;
+  }
+
+  .index-footer .brand {
+    font-size: 36px;
+    letter-spacing: -3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 3.5rem 1rem 3.5rem;
+    gap: 0.75rem;
+  }
+
+  .controls-top,
+  .controls-bottom {
+    gap: 1rem;
+  }
+
+  .controls-top button,
+  .controls-bottom button {
+    font-size: 12px;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

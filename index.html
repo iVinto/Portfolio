@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinto's Portfolio</title>
+  <meta name="description" content="Concert and festival photography portfolio by Vinto. Documenting live music events across Poland and beyond.">
+  <meta property="og:title" content="Vinto's Portfolio">
+  <meta property="og:description" content="Concert and festival photography by Vinto.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="index-container">
+    <div class="filters-container">
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="table-container">
+      <table id="eventsTable">
+        <thead>
+          <tr>
+            <th class="sortable year-column" data-col="0">YEAR</th>
+            <th class="sortable" data-col="1">NAME</th>
+          </tr>
+        </thead>
+        <tbody id="eventsBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <img id="hoverImage" src="" alt="">
+  <footer class="index-footer">
+    <div class="brand">Vinto's</div>
+    <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
+    <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+  </footer>
+
+  <script src="events.js"></script>
+  <script>
+    const tbody = document.getElementById("eventsBody");
+    const hoverImage = document.getElementById("hoverImage");
+    const filtersDiv = document.getElementById("filters");
+
+    // Build table rows from EVENTS config
+    EVENTS.forEach(ev => {
+      const tr = document.createElement("tr");
+      tr.className = ev.tags.join(" ");
+
+      tr.innerHTML = `<td>${ev.year}</td><td>${ev.title}</td>`;
+
+      tr.addEventListener("click", () => {
+        window.location.href = `gallery.html?event=${ev.id}`;
+      });
+
+      tr.addEventListener("mouseenter", () => {
+        hoverImage.src = `${ev.folder}/${ev.preview}`;
+        hoverImage.style.display = "block";
+      });
+
+      tr.addEventListener("mouseleave", () => {
+        hoverImage.style.display = "none";
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    // Hover image follows mouse
+    document.addEventListener("mousemove", (e) => {
+      if (hoverImage.style.display === "block") {
+        hoverImage.style.top = e.clientY + "px";
+        hoverImage.style.left = e.clientX + "px";
+      }
+    });
+
+    // Build filter buttons
+    const FILTERS = [
+      { label: "All", tag: null },
+      { label: "Festival", tag: "FESTIVAL" },
+      { label: "Concert", tag: "CONCERT" },
+      { label: "Club", tag: "CLUB" },
+      { label: "Arena", tag: "ARENA" },
+      { label: "Outdoor Stage", tag: "OUTDOOR" },
+      { label: "Polish Artist", tag: "POLAND" },
+      { label: "Foreign Artist", tag: "FOREIGN" }
+    ];
+
+    let activeTag = null;
+
+    FILTERS.forEach(f => {
+      const btn = document.createElement("button");
+      btn.textContent = f.label;
+      if (f.tag === null) btn.classList.add("active");
+
+      btn.addEventListener("click", () => {
+        activeTag = f.tag;
+        filtersDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyFilter();
+      });
+
+      filtersDiv.appendChild(btn);
+    });
+
+    function applyFilter() {
+      const rows = tbody.querySelectorAll("tr");
+      rows.forEach(row => {
+        if (!activeTag) {
+          row.style.display = "";
+        } else {
+          row.style.display = row.classList.contains(activeTag) ? "" : "none";
+        }
+      });
+    }
+
+    // Sortable columns
+    const sortDirs = {};
+    document.querySelectorAll("#eventsTable th.sortable").forEach(th => {
+      th.addEventListener("click", () => {
+        const col = parseInt(th.dataset.col);
+        sortDirs[col] = sortDirs[col] === "asc" ? "desc" : "asc";
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        rows.sort((a, b) => {
+          const aText = a.cells[col].textContent;
+          const bText = b.cells[col].textContent;
+          return sortDirs[col] === "asc"
+            ? aText.localeCompare(bText)
+            : bText.localeCompare(aText);
+        });
+        rows.forEach(row => tbody.appendChild(row));
+      });
+    });
+  </script>
+</body>
+</html>
