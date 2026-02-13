@@ -1,3 +1,6 @@
 .DS_Store
 *.DS_Store
 Thumbs.db
+
+# Original full-res images (kept locally, not deployed)
+Photography/
