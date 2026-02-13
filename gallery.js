@@ -25,12 +25,22 @@
   const grid = document.querySelector(".gallery-grid");
   grid.style.gridTemplateColumns = `repeat(${event.columns}, 1fr)`;
 
+  // Load first few images eagerly, lazy-load the rest
   event.images.forEach((filename, i) => {
     const img = document.createElement("img");
-    img.src = `${event.folder}/${filename}`;
     img.alt = `${event.title} — Photo ${i + 1}`;
     img.dataset.index = i;
-    img.loading = "lazy";
+    img.decoding = "async";
+
+    if (i < event.columns) {
+      // First row loads immediately (above the fold)
+      img.loading = "eager";
+      img.fetchPriority = "high";
+    } else {
+      img.loading = "lazy";
+    }
+
+    img.src = `${event.folder}/${filename}`;
     grid.appendChild(img);
   });
 
