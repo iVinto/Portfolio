@@ -13,6 +13,15 @@ body {
   background-color: #fff;
   color: #000;
   transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Prevent image dragging and saving */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
 }
 
 a {
