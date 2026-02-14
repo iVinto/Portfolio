@@ -28,8 +28,36 @@
     </div>
   </div>
   <img id="hoverImage" src="" alt="">
+  <div class="about-overlay" id="aboutOverlay">
+    <button class="about-close" id="aboutClose">&times;</button>
+    <div class="about-inner">
+      <div class="about-left">
+        <h1 class="about-name">Maciej Kowalski</h1>
+        <p class="about-role">Art Direction & Photography</p>
+        <p class="about-location">Based in Warsaw, Poland</p>
+      </div>
+      <div class="about-right">
+        <div class="about-section">
+          <h3 class="about-heading">About</h3>
+          <p>Concert and festival photographer documenting live music events across Poland and beyond.</p>
+        </div>
+        <div class="about-section">
+          <h3 class="about-heading">Worked with</h3>
+          <p>Orange Warsaw Festival, CLOUT / BIG IDEA, SBMF Festival, GOMBAO33, Progresja</p>
+        </div>
+        <div class="about-section">
+          <h3 class="about-heading">Contact</h3>
+          <p>
+            <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a><br>
+            <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="index-footer">
-    <div class="brand">Vinto's</div>
+    <div class="brand" id="brandButton" style="cursor:pointer;">Vinto's</div>
     <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
     <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
   </footer>
@@ -111,6 +139,23 @@
         }
       });
     }
+
+    // About overlay
+    const aboutOverlay = document.getElementById("aboutOverlay");
+    const brandButton = document.getElementById("brandButton");
+    const aboutClose = document.getElementById("aboutClose");
+
+    brandButton.addEventListener("click", () => {
+      aboutOverlay.classList.add("visible");
+    });
+
+    aboutClose.addEventListener("click", () => {
+      aboutOverlay.classList.remove("visible");
+    });
+
+    aboutOverlay.addEventListener("click", (e) => {
+      if (e.target === aboutOverlay) aboutOverlay.classList.remove("visible");
+    });
 
     // Sortable columns
     const sortDirs = {};

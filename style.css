@@ -156,6 +156,110 @@ a:hover {
 }
 
 /* ========================
+   ABOUT OVERLAY (INDEX)
+   ======================== */
+
+.about-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.about-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.about-close {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #000;
+  line-height: 1;
+}
+
+.about-close:hover {
+  opacity: 0.5;
+}
+
+.about-inner {
+  display: flex;
+  gap: 6rem;
+  max-width: 900px;
+  width: 100%;
+  padding: 2.5rem;
+}
+
+.about-left {
+  flex-shrink: 0;
+  min-width: 260px;
+}
+
+.about-name {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.about-role {
+  font-size: 16px;
+  margin-bottom: 0.25rem;
+}
+
+.about-location {
+  font-size: 14px;
+  color: #666;
+}
+
+.about-right {
+  flex: 1;
+}
+
+.about-section {
+  margin-bottom: 2rem;
+}
+
+.about-heading {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #999;
+}
+
+.about-section p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.about-section a {
+  text-decoration: underline;
+}
+
+.index-footer .brand:hover {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+/* ========================
    GALLERY PAGE
    ======================== */
 
@@ -306,6 +410,22 @@ a:hover {
   .index-footer .brand {
     font-size: 36px;
     letter-spacing: -3px;
+  }
+
+  .about-inner {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+  .about-left {
+    min-width: auto;
+  }
+
+  .about-name {
+    font-size: 32px;
   }
 }
 
