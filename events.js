@@ -12,7 +12,7 @@
  *   folder      - Path to image folder (relative to Photography/)
  *   images      - Array of filenames in that folder
  *   columns     - Grid columns for gallery (2 or 3)
- *   preview     - Which image to show on hover in the table (e.g. "2.jpg")
+ *   preview     - Which image to show on hover in the table (e.g. "2.webp")
  *   about       - Object with: title, description, date, location
  */
 
@@ -23,9 +23,9 @@ const EVENTS = [
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     folder: "Photography_web/OWF_yeat",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
     columns: 3,
-    preview: "4.jpg",
+    preview: "4.webp",
     about: {
       title: "YEAT AT ORANGE WARSAW FESTIVAL",
       description: "Photo relation from OWF for a media outlet.",
@@ -39,9 +39,9 @@ const EVENTS = [
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     folder: "Photography_web/OWF_Yungblud",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp"],
     columns: 3,
-    preview: "2.jpg",
+    preview: "2.webp",
     about: {
       title: "YUNGBLUD AT ORANGE WARSAW FESTIVAL",
       description: "Photo relation from OWF for a media outlet.",
@@ -55,9 +55,9 @@ const EVENTS = [
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     folder: "Photography_web/OWF_KenCarson",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp"],
     columns: 3,
-    preview: "1.jpg",
+    preview: "1.webp",
     about: {
       title: "KEN CARSON AT ORANGE WARSAW FESTIVAL",
       description: "Photo relation from OWF for a media outlet.",
@@ -71,9 +71,9 @@ const EVENTS = [
     year: 2024,
     tags: ["CLUB", "CONCERT", "POLAND"],
     folder: "Photography_web/Bambi",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
     columns: 3,
-    preview: "2.jpg",
+    preview: "2.webp",
     about: {
       title: "BAMBI IRL TOUR",
       description: "Experimental personal project.",
@@ -87,9 +87,9 @@ const EVENTS = [
     year: 2023,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     folder: "Photography_web/YoungMultiSBM2023",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
     columns: 2,
-    preview: "1.jpg",
+    preview: "1.webp",
     about: {
       title: "YOUNG MULTI AT SBMFFESTIVAL 2023",
       description: "Personal project.",
@@ -103,9 +103,9 @@ const EVENTS = [
     year: 2023,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     folder: "Photography_web/SBM2023",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
     columns: 3,
-    preview: "11.jpg",
+    preview: "11.webp",
     about: {
       title: "SBMFFESTIVAL 2023",
       description: "Photo relation from SBM for a media outlet.",
@@ -120,12 +120,12 @@ const EVENTS = [
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     folder: "Photography_web/CLOUT2.0",
     images: [
-      "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg",
-      "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg",
-      "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg"
+      "1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp",
+      "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp", "15.webp", "16.webp",
+      "17.webp", "18.webp", "19.webp", "20.webp", "21.webp", "22.webp", "23.webp", "24.webp"
     ],
     columns: 3,
-    preview: "5.jpg",
+    preview: "5.webp",
     about: {
       title: "CLOUT FESTIVAL 2.0",
       description: "Festival Media Team work for CLOUT/BIG IDEA.",
@@ -139,9 +139,9 @@ const EVENTS = [
     year: 2023,
     tags: ["CONCERT", "ARENA", "POLAND"],
     folder: "Photography_web/zabson_ostatniziomal",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
     columns: 3,
-    preview: "9.jpg",
+    preview: "9.webp",
     about: {
       title: "ŻABSON OSTATNI ZIOMAL TOUR 2023",
       description: "Personal project.",
@@ -155,9 +155,9 @@ const EVENTS = [
     year: 2023,
     tags: ["CONCERT", "ARENA", "POLAND"],
     folder: "Photography_web/MataGliwice",
-    images: ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg", "7.jpeg", "8.jpeg", "9.jpeg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
     columns: 3,
-    preview: "2.jpeg",
+    preview: "2.webp",
     about: {
       title: "MATA TOUR GLIWICE",
       description: "Final documentation of the tour.",
@@ -171,9 +171,9 @@ const EVENTS = [
     year: 2022,
     tags: ["CLUB", "CONCERT", "FOREIGN"],
     folder: "Photography_web/PierreRoadToClout",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp"],
     columns: 2,
-    preview: "3.jpg",
+    preview: "3.webp",
     about: {
       title: "ROAD TO CLOUT: PI'ERRE BOURNE",
       description: "Work for CLOUT/BIG IDEA.",
@@ -188,11 +188,11 @@ const EVENTS = [
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     folder: "Photography_web/MATA_TOUR",
     images: [
-      "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg",
-      "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg"
+      "1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp",
+      "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp", "15.webp", "16.webp"
     ],
     columns: 2,
-    preview: "7.jpg",
+    preview: "7.webp",
     about: {
       title: "MATA TOUR :) 2022",
       description: "Summer tour concert relation for MATA/GOMBAO33.",
@@ -206,9 +206,9 @@ const EVENTS = [
     year: 2022,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     folder: "Photography_web/White2115PrettyBoyTour",
-    images: ["1.jpeg", "2.jpeg", "3.jpeg"],
+    images: ["1.webp", "2.webp", "3.webp"],
     columns: 3,
-    preview: "1.jpeg",
+    preview: "1.webp",
     about: {
       title: "WHITE 2115 PRETTY BOY TOUR",
       description: "Personal project.",
@@ -222,9 +222,9 @@ const EVENTS = [
     year: 2022,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     folder: "Photography_web/JakubOnStageMegaHipHopTour",
-    images: ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpg", "6.jpeg", "7.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp"],
     columns: 2,
-    preview: "2.jpeg",
+    preview: "2.webp",
     about: {
       title: "JAKUB ON STAGE MEGA HIP-HOP TOUR",
       description: "Personal project.",
@@ -238,9 +238,9 @@ const EVENTS = [
     year: 2022,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     folder: "Photography_web/KacperczykSBM2022",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp"],
     columns: 3,
-    preview: "6.jpg",
+    preview: "6.webp",
     about: {
       title: "BRACIA KACPERCZYK AT SBMFFESTIVAL 2022",
       description: "Personal project.",
@@ -254,9 +254,9 @@ const EVENTS = [
     year: 2022,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     folder: "Photography_web/KlaksonSBM2022",
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp"],
     columns: 2,
-    preview: "1.jpg",
+    preview: "1.webp",
     about: {
       title: "MŁODY KLAKSON AT SBMFFESTIVAL 2022",
       description: "Personal project.",
@@ -270,9 +270,9 @@ const EVENTS = [
     year: 2021,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     folder: "Photography_web/MataBemowo",
-    images: ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg"],
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
     columns: 3,
-    preview: "3.jpeg",
+    preview: "3.webp",
     about: {
       title: "MATA BEMOWO 2021",
       description: "Personal project.",
