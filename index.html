@@ -28,38 +28,31 @@
     </div>
   </div>
   <img id="hoverImage" src="" alt="">
-  <div class="about-overlay" id="aboutOverlay">
-    <button class="about-close" id="aboutClose">&times;</button>
-    <div class="about-inner">
-      <div class="about-left">
-        <h1 class="about-name">Maciej Kowalski</h1>
-        <p class="about-role">Art Direction & Photography</p>
-        <p class="about-location">Based in Warsaw, Poland</p>
-      </div>
-      <div class="about-right">
-        <div class="about-section">
-          <h3 class="about-heading">About</h3>
-          <p>Architecture student driven by a passion for photography. Specializing in music and festival photography, as well as PR shoots, commercial photography, editorials, mixed media and creative direction.</p>
+  <footer class="index-footer" id="indexFooter">
+    <div class="brand" id="brandButton" style="cursor:pointer;">Vinto's</div>
+    <div class="footer-about" id="footerAbout">
+      <div class="footer-about-inner">
+        <div class="footer-about-left">
+          <h2 class="footer-about-name">Maciej Kowalski</h2>
+          <p class="footer-about-role">Art Direction & Photography</p>
+          <p class="footer-about-location">Based in Warsaw, Poland</p>
         </div>
-        <div class="about-section">
-          <h3 class="about-heading">Worked with</h3>
-          <p>2115, Big Idea, Clout Festival, MATA, Radio 357, SBM</p>
-        </div>
-        <div class="about-section">
-          <h3 class="about-heading">Contact</h3>
-          <p>
-            <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a><br>
-            <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
-          </p>
+        <div class="footer-about-right">
+          <div class="footer-about-section">
+            <h3 class="footer-about-heading">About</h3>
+            <p>Architecture student driven by a passion for photography. Specializing in music and festival photography, as well as PR shoots, commercial photography, editorials, mixed media and creative direction.</p>
+          </div>
+          <div class="footer-about-section">
+            <h3 class="footer-about-heading">Worked with</h3>
+            <p>2115, Big Idea, Clout Festival, MATA, Radio 357, SBM</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <footer class="index-footer">
-    <div class="brand" id="brandButton" style="cursor:pointer;">Vinto's</div>
-    <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
-    <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+    <div class="footer-links">
+      <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
+      <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+    </div>
   </footer>
 
   <script src="protect.js"></script>
@@ -140,21 +133,12 @@
       });
     }
 
-    // About overlay
-    const aboutOverlay = document.getElementById("aboutOverlay");
+    // About toggle in footer
+    const footer = document.getElementById("indexFooter");
     const brandButton = document.getElementById("brandButton");
-    const aboutClose = document.getElementById("aboutClose");
 
     brandButton.addEventListener("click", () => {
-      aboutOverlay.classList.add("visible");
-    });
-
-    aboutClose.addEventListener("click", () => {
-      aboutOverlay.classList.remove("visible");
-    });
-
-    aboutOverlay.addEventListener("click", (e) => {
-      if (e.target === aboutOverlay) aboutOverlay.classList.remove("visible");
+      footer.classList.toggle("expanded");
     });
 
     // Sortable columns
