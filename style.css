@@ -200,7 +200,7 @@ a:hover {
 .gallery-grid {
   display: grid;
   gap: 1.25rem;
-  padding: 3.75rem 2.5rem;
+  padding: 4rem 2.5rem;
   align-items: end;
 }
 
@@ -231,22 +231,28 @@ a:hover {
 
 .controls-top {
   position: fixed;
-  top: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 3;
   display: flex;
+  justify-content: center;
   gap: 3.75rem;
+  background-color: white;
+  padding: 0.75rem 0;
 }
 
 .controls-bottom {
   position: fixed;
-  bottom: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  width: 100%;
   z-index: 3;
   display: flex;
+  justify-content: center;
   gap: 3.75rem;
+  background-color: white;
+  padding: 0.75rem 0;
 }
 
 .controls-top button,
@@ -256,7 +262,7 @@ a:hover {
   cursor: pointer;
   background: none;
   border: none;
-  color: inherit;
+  color: black;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
