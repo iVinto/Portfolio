@@ -95,17 +95,27 @@
       { label: "Foreign Artist", tag: "FOREIGN" }
     ];
 
-    let activeTag = null;
+    let activeTags = new Set();
 
     FILTERS.forEach(f => {
       const btn = document.createElement("button");
       btn.textContent = f.label;
-      if (f.tag === null) btn.classList.add("active");
 
       btn.addEventListener("click", () => {
-        activeTag = f.tag;
-        filtersDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+        if (f.tag === null) {
+          // "All" clears everything
+          activeTags.clear();
+          filtersDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+        } else {
+          // Toggle this tag
+          if (activeTags.has(f.tag)) {
+            activeTags.delete(f.tag);
+            btn.classList.remove("active");
+          } else {
+            activeTags.add(f.tag);
+            btn.classList.add("active");
+          }
+        }
         applyFilter();
       });
 
@@ -115,10 +125,12 @@
     function applyFilter() {
       const rows = tbody.querySelectorAll("tr");
       rows.forEach(row => {
-        if (!activeTag) {
+        if (activeTags.size === 0) {
           row.style.display = "";
         } else {
-          row.style.display = row.classList.contains(activeTag) ? "" : "none";
+          // Row must match ALL active tags
+          const matches = [...activeTags].every(tag => row.classList.contains(tag));
+          row.style.display = matches ? "" : "none";
         }
       });
     }
