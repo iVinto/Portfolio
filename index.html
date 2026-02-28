@@ -85,21 +85,23 @@
 
     // Build filter buttons
     const FILTERS = [
-      { label: "All", tag: null },
-      { label: "Festival", tag: "FESTIVAL" },
-      { label: "Concert", tag: "CONCERT" },
-      { label: "Club", tag: "CLUB" },
-      { label: "Arena", tag: "ARENA" },
-      { label: "Outdoor Stage", tag: "OUTDOOR" },
-      { label: "Polish Artist", tag: "POLAND" },
-      { label: "Foreign Artist", tag: "FOREIGN" }
+      { label: "All", tag: null, group: null },
+      { label: "Festival", tag: "FESTIVAL", group: "type" },
+      { label: "Concert", tag: "CONCERT", group: "type" },
+      { label: "Club", tag: "CLUB", group: "type" },
+      { label: "Arena", tag: "ARENA", group: "type" },
+      { label: "Outdoor Stage", tag: "OUTDOOR", group: "type" },
+      { label: "Polish Artist", tag: "POLAND", group: "origin" },
+      { label: "Foreign Artist", tag: "FOREIGN", group: "origin" }
     ];
 
     let activeTags = new Set();
+    const btnMap = new Map(); // tag -> button element
 
     FILTERS.forEach(f => {
       const btn = document.createElement("button");
       btn.textContent = f.label;
+      if (f.tag) btnMap.set(f.tag, btn);
 
       btn.addEventListener("click", () => {
         if (f.tag === null) {
@@ -112,6 +114,14 @@
             activeTags.delete(f.tag);
             btn.classList.remove("active");
           } else {
+            // Deactivate others in the same group
+            FILTERS.forEach(other => {
+              if (other.group === f.group && other.tag !== f.tag && other.tag !== null) {
+                activeTags.delete(other.tag);
+                const otherBtn = btnMap.get(other.tag);
+                if (otherBtn) otherBtn.classList.remove("active");
+              }
+            });
             activeTags.add(f.tag);
             btn.classList.add("active");
           }
