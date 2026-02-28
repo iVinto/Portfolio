@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="mobileGate">
+    <p>Full experience available on desktop</p>
+    <button id="mobileSkip">nevermind</button>
+  </div>
   <div class="index-container">
     <div class="filters-container">
       <div class="filters" id="filters"></div>
@@ -125,6 +129,15 @@
 
     brandButton.addEventListener("click", () => {
       footer.classList.toggle("expanded");
+    });
+
+    // Mobile gate
+    if (sessionStorage.getItem('gateSkipped')) {
+      document.body.classList.add('gate-dismissed');
+    }
+    document.getElementById('mobileSkip').addEventListener('click', () => {
+      sessionStorage.setItem('gateSkipped', '1');
+      document.body.classList.add('gate-dismissed');
     });
 
     // Sortable columns
