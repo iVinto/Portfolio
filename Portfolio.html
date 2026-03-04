@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinto's Portfolio</title>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      cursor: default;
+    }
+
+    thead {
+      font-size: 14px;
+      /* Set font size for the table header */
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .filters-container {
+      padding-top: 2.5rem;
+      flex-shrink: 1;
+      flex-grow: 1;
+      padding-left: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 120px);
+    }
+
+    .info-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .info-section a {
+      color: black;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-section a:hover {
+      text-decoration: underline;
+    }
+
+    .table-container {
+      padding-top: 2.5rem;
+      flex-shrink: 0;
+      padding-right: 2.5rem;
+      width: 50%;
+      /* Set the width for the filters container */
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: 1.25rem;
+      font-size: 16px;
+      width: 100%;
+      /* Make the table fill its container */
+    }
+
+    th,
+    td {
+      padding: 0.5rem;
+      text-align: left;
+      border: none;
+    }
+
+    thead {
+      padding-left: 0rem;
+      font-size: 10px;
+      /* Adjust font size as needed */
+      font-weight: bold;
+      /* Make the text bold */
+      color: black;
+      /* Change text color */
+    }
+
+    .year-column {
+      width: 6.5rem;
+      /* Set a fixed width for the year column */
+    }
+
+    #hoverImage {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      z-index: 1000;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      /* Allow buttons to wrap to the next line */
+      width: 100%;
+      /* Ensure the filters container uses full width */
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1.25rem;
+    }
+
+    .filters button {
+      flex-shrink: 0;
+      border-radius: 0;
+      /* Make the border corners sharp */
+      border-color: black;
+      border-width: 1px;
+      padding: 0.5rem 1.25rem;
+      /* Add padding inside the buttons */
+      margin-right: 10px;
+      /* Add margin to separate the buttons horizontally */
+      margin-bottom: 10px;
+      /* Add margin to separate the buttons vertically */
+      background-color: white;
+    }
+
+    th.SEGREGACJA:hover {
+      text-decoration: underline;
+    }
+
+    tr.hoverable:hover {
+      background-color: yellow;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    footer {
+      padding: 2.5rem;
+      text-align: left;
+      font-size: 14px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+    }
+
+    footer a {
+      color: black;
+      text-decoration: none;
+      margin-right: 0.75rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    button:hover,
+    button:focus {
+      text-decoration: underline;
+      background-color: black;
+      text-decoration-color: white;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="filters-container">
+      <div class="filters">
+        <button onclick="resetFilters()">All</button>
+        <button onclick="toggleFilter('.FESTIVAL')">Festival</button>
+        <button onclick="toggleFilter('.CONCERT')">Concert</button>
+        <button onclick="toggleFilter('.CLUB')">Club</button>
+        <button onclick="toggleFilter('.ARENA')">Arena</button>
+        <button onclick="toggleFilter('.OUTDOOR')">Outdoor Stage</button>
+        <button onclick="toggleFilter('.POLAND')">Polish Artist</button>
+        <button onclick="toggleFilter('.FOREIGN')">Foreign Artist</button>
+      </div>
+      <div class="info-section">
+        <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
+        <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+      </div>
+    </div>
+    <div class="table-container">
+      <table id="myTable">
+        <thead>
+          <tr class="FESTIVAL CONCERT CLUB ARENA POLAND OUTDOOR FOREIGN">
+            <th class="SEGREGACJA" onclick="sortTable('myTable', 0)">YEAR<span class="arrow"></span>
+            </th>
+            <th CLASS="SEGREGACJA" onclick="sortTable('myTable', 1)">NAME<span class="arrow"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Existing table rows go here -->
+          <tr class="hoverable OUTDOOR FESTIVAL FOREIGN" onmouseover="showImage('./Photography/OWF_YEAT/4.jpg')" onmouseout="hideImage()" onclick="goToPage('OWF-YEAT.html')">
+            <td>2024</td>
+            <td>YEAT / ORANGE WARSAW FESTIVAL</td>
+          </tr>
+          <tr class="hoverable OUTDOOR FESTIVAL FOREIGN" onmouseover="showImage('./Photography/OWF_Yungblud/2.jpg')" onmouseout="hideImage()" onclick="goToPage('OWF-yungblud.html')">
+            <td>2024</td>
+            <td>YUNGBLUD / ORANGE WARSAW FESTIVAL</td>
+          </tr>
+          <tr class="hoverable OUTDOOR FESTIVAL FOREIGN" onmouseover="showImage('./Photography/OWF_KenCarson/1.jpg')" onmouseout="hideImage()" onclick="goToPage('OWF-kencarson.html')">
+            <td>2024</td>
+            <td>KEN CARSON / ORANGE WARSAW FESTIVAL</td>
+          </tr>
+          <tr class="hoverable CLUB CONCERT POLAND" onmouseover="showImage('./Photography/Bambi/2.jpg')" onmouseout="hideImage()" onclick="goToPage('bambi-irl-tour.html')">
+            <td>2024</td>
+            <td>BAMBI / IRL TOUR WARSAW</td>
+          </tr>
+          <tr class="hoverable FESTIVAL OUTDOOR POLAND" onmouseover="showImage('./Photography/YoungMultiSBM2023/1.jpg')" onmouseout="hideImage()" onclick="goToPage('youngmulti-sbm2023.html')">
+            <td>2023</td>
+            <td>YOUNG MULTI / SBMFFESTIVAL 2023</td>
+          </tr>
+          <tr class="hoverable FESTIVAL OUTDOOR POLAND" onmouseover="showImage('./Photography/SBM2023/11.jpg')" onmouseout="hideImage()" onclick="goToPage('sbm2023.html')">
+            <td>2023</td>
+            <td>SBMFFESTIVAL 2023</td>
+          </tr>
+          <tr class="hoverable OUTDOOR FESTIVAL FOREIGN" onmouseover="showImage('./Photography/CLOUT2.0/5.jpg')" onmouseout="hideImage()" onclick="goToPage('clout20.html')">
+            <td>2023</td>
+            <td>CLOUT FESTIVAL 2.0</td>
+          </tr>
+          <tr class="hoverable CONCERT ARENA POLAND" onmouseover="showImage('./Photography/zabson_ostatniziomal/9.jpg')" onmouseout="hideImage()" onclick="goToPage('zabson-ostatniziomal.html')">
+            <td>2023</td>
+            <td>ŻABSON / OSTATNI ZIOMAL TOUR WARSAW</td>
+          </tr>
+          <tr class="hoverable CONCERT ARENA POLAND" onmouseover="showImage('./Photography/MataGliwice/2.jpeg')" onmouseout="hideImage()" onclick="goToPage('mata-gliwice.html')">
+            <td>2023</td>
+            <td>MATA / MATA TOUR GLIWICE</td>
+          </tr>
+          <tr class="hoverable CLUB CONCERT FOREIGN" onmouseover="showImage('./Photography/PierreRoadToClout/3.jpg')" onmouseout="hideImage()" onclick="goToPage('PierreRoadToClout.html')">
+            <td>2022</td>
+            <td>PI'ERRE BOURNE / ROAD TO CLOUT</td>
+          <tr class="hoverable CONCERT OUTDOOR POLAND" onmouseover="showImage('./Photography/MATA_TOUR/7.jpg')" onmouseout="hideImage()" onclick="goToPage('mata-tour.html')">
+            <td>2022</td>
+            <td>MATA / MATA TOUR :)</td>
+            <tr class="hoverable CONCERT OUTDOOR POLAND" onmouseover="showImage('./Photography/White2115PrettyBoyTour/1.jpeg')" onmouseout="hideImage()" onclick="goToPage('White2115PrettyBoyTour.html')">
+              <td>2022</td>
+              <td>WHITE 2115 / PRETTY BOY TOUR</td>
+              <tr class="hoverable CONCERT OUTDOOR POLAND" onmouseover="showImage('./Photography/JakubOnStageMegaHipHopTour/2.jpeg')" onmouseout="hideImage()" onclick="goToPage('JakubOnStageMegaHipHopTour.html')">
+                <td>2022</td>
+                <td>JAKUB ON STAGE / MEGA HIP-HOP TOUR</td>
+          </tr>
+          <tr class="hoverable FESTIVAL OUTDOOR POLAND" onmouseover="showImage('./Photography/KacperczykSBM2022/6.jpg')" onmouseout="hideImage()" onclick="goToPage('KacperczykSBM2022.html')">
+            <td>2022</td>
+            <td>BRACIA KACPERCZYK / SBM 2022</td>
+          </tr>
+          <tr class="hoverable FESTIVAL OUTDOOR POLAND" onmouseover="showImage('./Photography/KlaksonSBM2022/1.jpg')" onmouseout="hideImage()" onclick="goToPage('KlaksonSBM2022.html')">
+            <td>2022</td>
+            <td>MŁODY KLAKSON / SBM 2022</td>
+          </tr>
+          <tr class="hoverable CONCERT OUTDOOR POLAND" onmouseover="showImage('./Photography/MataBemowo/3.jpeg')" onmouseout="hideImage()" onclick="goToPage('MataBemowo.html')">
+            <td>2021</td>
+            <td>MATA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <img id="hoverImage" src="" height="400" />
+  <script>
+    const hoverImage = document.getElementById("hoverImage");
+    const allFilterButtons = document.querySelectorAll('.filters button');
+
+    function showImage(src) {
+      hoverImage.src = src;
+      hoverImage.style.display = "block";
+      document.addEventListener('mousemove', moveImage);
+    }
+
+    function hideImage() {
+      hoverImage.style.display = "none";
+      document.removeEventListener('mousemove', moveImage);
+    }
+
+    function moveImage(event) {
+      hoverImage.style.top = event.clientY + 'px';
+      hoverImage.style.left = event.clientX + 'px';
+    }
+
+    const sortingDirections = {};
+
+    function sortTable(tableId, columnIndex) {
+      const table = document.getElementById(tableId);
+      const rows = Array.from(table.rows).slice(1); // Skip the header row
+
+      if (!sortingDirections[columnIndex]) {
+        sortingDirections[columnIndex] = 'asc'; // Default to ascending
+      } else if (sortingDirections[columnIndex] === 'asc') {
+        sortingDirections[columnIndex] = 'desc'; // Change to descending
+      } else {
+        sortingDirections[columnIndex] = 'asc'; // Change to ascending
+      }
+
+      rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].innerText;
+        const bText = b.cells[columnIndex].innerText;
+        let result;
+
+        if (sortingDirections[columnIndex] === 'asc') {
+          result = aText.localeCompare(bText);
+        } else {
+          result = bText.localeCompare(aText);
+        }
+
+        return result;
+      });
+
+      const tbody = table.querySelector("tbody");
+      rows.forEach(row => tbody.appendChild(row));
+    }
+
+    function toggleFilter(selector) {
+      resetFilters(); // Reset filters before applying new ones
+
+      const nonFilteredRows = document.querySelectorAll(`tr:not(${selector})`);
+      nonFilteredRows.forEach(row => {
+        if (row.style.display === "none" || row.style.display === "") {
+          row.style.display = "table-row";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+
+    function resetFilters() {
+      // Remove the 'active' class from all filter buttons
+      allFilterButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Show all rows by setting their display property to 'table-row'
+      const allRows = document.querySelectorAll('tr.hoverable');
+      allRows.forEach(row => {
+        row.style.display = "table-row";
+      });
+    }
+
+    function goToPage(url) {
+      window.location.href = url;
+    }
+  </script>
+  <footer>
+    <div style="color:black;font-size:54px;font-family:Arial;letter-spacing:-5.8px;font-style:normal;font-weight:700;text-transform:none;">
+      Vinto's
+    </div>
+  </footer>
+
+</body>
+
+</html>
+
+
