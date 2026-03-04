@@ -195,6 +195,8 @@ a:hover {
 
 .index-footer .brand {
   margin-bottom: 20px;
+  text-decoration: none !important;
+  cursor: default;
 }
 
 .index-footer .footer-links a {
