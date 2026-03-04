@@ -194,7 +194,11 @@ a:hover {
 }
 
 .index-footer .brand {
-  margin-bottom: 0;
+  margin-bottom: 20px;
+}
+
+.index-footer .footer-links a {
+  margin-right: 0.75rem;
 }
 
 /* ========================
