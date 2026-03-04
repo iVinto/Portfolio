@@ -60,6 +60,33 @@ a:hover {
   padding: 2.5rem;
   padding-top: 2.5rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+}
+
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-content {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.info-content p {
+  margin-bottom: 0.4rem;
+}
+
+.info-links {
+  margin-top: 1rem;
+}
+
+.info-links a {
+  margin-right: 0.75rem;
 }
 
 .filters {
@@ -166,31 +193,8 @@ a:hover {
   margin-bottom: 20px;
 }
 
-.index-footer .brand:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-.index-footer .footer-links a {
-  margin-right: 0.75rem;
-}
-
-/* Footer about — hidden by default */
-.footer-about {
-  display: none;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.footer-about p {
-  margin-bottom: 0.4rem;
-}
-
-/* Expanded state */
-.index-footer.expanded .footer-about {
-  display: block;
-  padding-bottom: 1.25rem;
+.index-footer .brand {
+  margin-bottom: 0;
 }
 
 /* ========================
@@ -362,6 +366,12 @@ a:hover {
 
   .filters-container {
     padding: 1.5rem;
+    height: auto;
+  }
+
+  .info-section {
+    flex: none;
+    padding: 1rem 0;
   }
 
   .table-container {
