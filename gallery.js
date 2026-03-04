@@ -125,6 +125,17 @@
     const isDark = color === "#000";
     overlay.style.backgroundColor = isDark ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)";
     document.body.style.color = isDark ? "#fff" : "#000";
+
+    // Update control bars
+    const controlsTop = document.querySelector(".controls-top");
+    const controlsBottom = document.querySelector(".controls-bottom");
+    controlsTop.style.backgroundColor = color;
+    controlsBottom.style.backgroundColor = color;
+
+    // Update button text color
+    controlsTop.querySelectorAll("button").forEach(b => b.style.color = isDark ? "#fff" : "#000");
+    controlsBottom.querySelectorAll("button").forEach(b => b.style.color = isDark ? "#fff" : "#000");
+
     updateButtons();
   };
 
