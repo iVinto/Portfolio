@@ -78,6 +78,12 @@ a:hover {
   margin-bottom: 0.4rem;
 }
 
+.info-portrait {
+  margin-top: 1.25rem;
+  width: 250px;
+  display: block;
+}
+
 .info-links {
   margin-top: 1rem;
 }
