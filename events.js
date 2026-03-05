@@ -18,6 +18,22 @@
 
 const EVENTS = [
   {
+    id: "kuqe2115-nareszcie-w-trasie-vol2",
+    title: "KUQE 2115 / NARESZCIE W TRASIE VOL. 2",
+    year: 2025,
+    tags: ["CLUB", "CONCERT", "POLAND"],
+    folder: "Photography_web/kuqe2115_nareszcie_w_trasie_vol2",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "KUQE 2115 — NARESZCIE W TRASIE VOL. 2",
+      description: "Photo relation from tour for artist, booking and management. Promotional shoots and backstage.",
+      date: "11–12.2025",
+      location: "Poland"
+    }
+  },
+  {
     id: "owf-yeat",
     title: "YEAT / ORANGE WARSAW FESTIVAL",
     year: 2024,
