@@ -18,6 +18,86 @@
 
 const EVENTS = [
   {
+    id: "fka-twigs-opener2025",
+    title: "FKA TWIGS / OPEN'ER FESTIVAL 2025",
+    year: 2025,
+    tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
+    folder: "Photography_web/FKA_Twigs_Opener2025",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "FKA TWIGS AT OPEN'ER FESTIVAL 2025",
+      description: "Festival photo relation.",
+      date: "2025",
+      location: "Gdynia, Poland"
+    }
+  },
+  {
+    id: "kuban-opener2025",
+    title: "KUBAN / OPEN'ER FESTIVAL 2025",
+    year: 2025,
+    tags: ["OUTDOOR", "FESTIVAL", "POLAND"],
+    folder: "Photography_web/Kuban_Opener2025",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "KUBAN AT OPEN'ER FESTIVAL 2025",
+      description: "Festival photo relation.",
+      date: "2025",
+      location: "Gdynia, Poland"
+    }
+  },
+  {
+    id: "clout-festival-4",
+    title: "CLOUT FESTIVAL 4.0",
+    year: 2025,
+    tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
+    folder: "Photography_web/CloutFestival4.0",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "CLOUT FESTIVAL 4.0",
+      description: "Festival Media Team work for CLOUT/BIG IDEA.",
+      date: "2025",
+      location: "Warsaw, Poland"
+    }
+  },
+  {
+    id: "trippie-redd-clout",
+    title: "TRIPPIE REDD / CLOUT FESTIVAL",
+    year: 2025,
+    tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
+    folder: "Photography_web/TrippieRedd_Clout",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "TRIPPIE REDD AT CLOUT FESTIVAL",
+      description: "Festival photo relation.",
+      date: "2025",
+      location: "Warsaw, Poland"
+    }
+  },
+  {
+    id: "lord-apex",
+    title: "LORD APEX",
+    year: 2025,
+    tags: ["CLUB", "CONCERT", "FOREIGN"],
+    folder: "Photography_web/LordApex",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "LORD APEX",
+      description: "Concert photo relation.",
+      date: "2025",
+      location: "Poland"
+    }
+  },
+  {
     id: "kuqe2115-nareszcie-w-trasie-vol2",
     title: "KUQE 2115 / NARESZCIE W TRASIE VOL. 2",
     year: 2025,
