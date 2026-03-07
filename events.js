@@ -25,7 +25,7 @@ const EVENTS = [
     folder: "Photography_web/CloutFestival4.0",
     images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp"],
     columns: 3,
-    preview: "1.webp",
+    preview: "3.webp",
     about: {
       title: "CLOUT FESTIVAL 4.0",
       description: "Festival Media Team work for CLOUT/BIG IDEA.",
@@ -44,7 +44,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "FKA TWIGS AT OPEN'ER FESTIVAL 2025",
-      description: "Festival photo relation.",
+      description: "Photo relation for Radio 357.",
       date: "04.07.2025",
       location: "Lotnisko Gdynia-Kosakowo, Gdynia, Poland"
     }
@@ -55,12 +55,12 @@ const EVENTS = [
     year: 2025,
     tags: ["OUTDOOR", "FESTIVAL", "POLAND"],
     folder: "Photography_web/Kuban_Opener2025",
-    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
+    images: ["9.webp", "8.webp", "7.webp", "6.webp", "5.webp", "4.webp", "3.webp", "2.webp", "1.webp"],
     columns: 3,
-    preview: "1.webp",
+    preview: "9.webp",
     about: {
       title: "KUBAN AT OPEN'ER FESTIVAL 2025",
-      description: "Festival photo relation.",
+      description: "Photo relation for Radio 357.",
       date: "05.07.2025",
       location: "Lotnisko Gdynia-Kosakowo, Gdynia, Poland"
     }
@@ -346,7 +346,7 @@ const EVENTS = [
   },
   {
     id: "mata-bemowo",
-    title: "MATA",
+    title: "MATA / BEMOWO",
     year: 2021,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     folder: "Photography_web/MataBemowo",
