@@ -89,7 +89,7 @@ const EVENTS = [
     folder: "Photography_web/TrippieRedd_Clout",
     images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
     columns: 3,
-    preview: "1.webp",
+    preview: "4.webp",
     about: {
       title: "TRIPPIE REDD AT CLOUT FESTIVAL 3.0",
       description: "Festival Media Team work for CLOUT/BIG IDEA.",
