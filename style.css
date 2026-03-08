@@ -94,6 +94,21 @@ a:hover {
   margin-right: 0.75rem;
 }
 
+.category-nav {
+  margin-bottom: 1.25rem;
+  font-size: 14px;
+}
+
+.category-nav a {
+  margin-right: 1rem;
+  color: black;
+  text-decoration: none;
+}
+
+.category-nav a.active {
+  text-decoration: underline;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
