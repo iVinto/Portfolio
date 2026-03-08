@@ -172,6 +172,24 @@
       document.body.classList.add('gate-dismissed');
     });
 
+    // Stagger entrance animations
+    tbody.querySelectorAll("tr").forEach((row, i) => {
+      row.style.animationDelay = `${i * 30}ms`;
+    });
+    filtersDiv.querySelectorAll("button").forEach((btn, i) => {
+      btn.style.animationDelay = `${i * 50}ms`;
+    });
+
+    // Exit animation on category switch
+    document.querySelectorAll('.category-nav a:not(.active)').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.href;
+        document.querySelector('.table-container').classList.add('exiting');
+        setTimeout(() => window.location.href = href, 300);
+      });
+    });
+
     // Sortable columns
     const sortDirs = {};
     document.querySelectorAll("#eventsTable th.sortable").forEach(th => {
