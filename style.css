@@ -175,6 +175,12 @@ a:hover {
   width: 6.5rem;
 }
 
+.wip-notice {
+  font-size: 14px;
+  padding-top: 1rem;
+  opacity: 0.5;
+}
+
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
