@@ -106,6 +106,23 @@ const EVENTS = [
     }
   },
   {
+    id: "poland-portugal-porto",
+    title: "POLAND - PORTUGAL / PORTO",
+    year: 2024,
+    tags: [],
+    category: "others",
+    folder: "Photography_web/Poland_Portugal_Porto",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "POLAND - PORTUGAL / PORTO",
+      description: "",
+      date: "15.11.2024",
+      location: "Porto, Portugal"
+    }
+  },
+  {
     id: "owf-yeat",
     title: "YEAT / ORANGE WARSAW FESTIVAL",
     year: 2024,
