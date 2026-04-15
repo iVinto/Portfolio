@@ -8,13 +8,13 @@
   <meta property="og:title" content="Vinto's Portfolio">
   <meta property="og:description" content="Concert and festival photography by Vinto. Best viewed on desktop.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://ivinto.github.io/Portfolio/og-image.png">
+  <meta property="og:image" content="/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vinto's Portfolio">
   <meta name="twitter:description" content="Concert and festival photography by Vinto. Best viewed on desktop.">
-  <meta name="twitter:image" content="https://ivinto.github.io/Portfolio/og-image.png">
+  <meta name="twitter:image" content="/og-image.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -56,7 +56,7 @@
     </div>
   </div>
   <img id="hoverImage" src="" alt="">
-  <footer class="index-footer" id="indexFooter">
+  <footer class="index-footer">
     <div class="brand">Vinto's</div>
     <div class="footer-links">
       <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
@@ -67,129 +67,18 @@
   <script src="protect.js"></script>
   <script src="events.js"></script>
   <script>
-    const tbody = document.getElementById("eventsBody");
-    const hoverImage = document.getElementById("hoverImage");
-    const filtersDiv = document.getElementById("filters");
-
-    // Build table rows from EVENTS config (concerts only, skip hidden)
-    EVENTS.filter(ev => ev.category === "concerts" && !ev.hidden).forEach(ev => {
-      const tr = document.createElement("tr");
-      tr.className = ev.tags.join(" ");
-
-      tr.innerHTML = `<td>${ev.year}</td><td>${ev.title}</td>`;
-
-      tr.addEventListener("click", () => {
-        window.location.href = `gallery.html?event=${ev.id}`;
-      });
-
-      tr.addEventListener("mouseenter", () => {
-        hoverImage.src = `${ev.folder}/${ev.preview}`;
-        hoverImage.style.display = "block";
-      });
-
-      tr.addEventListener("mouseleave", () => {
-        hoverImage.style.display = "none";
-      });
-
-      tbody.appendChild(tr);
-    });
-
-    // Hover image follows mouse
-    document.addEventListener("mousemove", (e) => {
-      if (hoverImage.style.display === "block") {
-        hoverImage.style.top = e.clientY + "px";
-        hoverImage.style.left = e.clientX + "px";
-      }
-    });
-
-    // Build filter buttons
-    const FILTERS = [
-      { label: "All", tag: null, group: null },
-      { label: "Festival", tag: "FESTIVAL", group: "type" },
-      { label: "Concert", tag: "CONCERT", group: "type" },
-      { label: "Club", tag: "CLUB", group: "venue" },
-      { label: "Arena", tag: "ARENA", group: "venue" },
-      { label: "Outdoor Stage", tag: "OUTDOOR", group: "venue" },
-      { label: "Polish Artist", tag: "POLAND", group: "origin" },
-      { label: "Foreign Artist", tag: "FOREIGN", group: "origin" }
+    window.PAGE_CATEGORY = "concerts";
+    window.PAGE_FILTERS = [
+      { label: "All",            tag: null,       group: null     },
+      { label: "Festival",       tag: "FESTIVAL", group: "type"   },
+      { label: "Concert",        tag: "CONCERT",  group: "type"   },
+      { label: "Club",           tag: "CLUB",     group: "venue"  },
+      { label: "Arena",          tag: "ARENA",    group: "venue"  },
+      { label: "Outdoor Stage",  tag: "OUTDOOR",  group: "venue"  },
+      { label: "Polish Artist",  tag: "POLAND",   group: "origin" },
+      { label: "Foreign Artist", tag: "FOREIGN",  group: "origin" }
     ];
-
-    let activeTags = new Set();
-    const btnMap = new Map(); // tag -> button element
-
-    FILTERS.forEach(f => {
-      const btn = document.createElement("button");
-      btn.textContent = f.label;
-      if (f.tag) btnMap.set(f.tag, btn);
-
-      btn.addEventListener("click", () => {
-        if (f.tag === null) {
-          // "All" clears everything
-          activeTags.clear();
-          filtersDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-        } else {
-          // Toggle this tag
-          if (activeTags.has(f.tag)) {
-            activeTags.delete(f.tag);
-            btn.classList.remove("active");
-          } else {
-            // Deactivate others in the same group
-            FILTERS.forEach(other => {
-              if (other.group === f.group && other.tag !== f.tag && other.tag !== null) {
-                activeTags.delete(other.tag);
-                const otherBtn = btnMap.get(other.tag);
-                if (otherBtn) otherBtn.classList.remove("active");
-              }
-            });
-            activeTags.add(f.tag);
-            btn.classList.add("active");
-          }
-        }
-        applyFilter();
-      });
-
-      filtersDiv.appendChild(btn);
-    });
-
-    function applyFilter() {
-      const rows = tbody.querySelectorAll("tr");
-      rows.forEach(row => {
-        if (activeTags.size === 0) {
-          row.style.display = "";
-        } else {
-          // Row must match ALL active tags
-          const matches = [...activeTags].every(tag => row.classList.contains(tag));
-          row.style.display = matches ? "" : "none";
-        }
-      });
-    }
-
-    // Mobile gate
-    if (sessionStorage.getItem('gateSkipped')) {
-      document.body.classList.add('gate-dismissed');
-    }
-    document.getElementById('mobileSkip').addEventListener('click', () => {
-      sessionStorage.setItem('gateSkipped', '1');
-      document.body.classList.add('gate-dismissed');
-    });
-
-    // Sortable columns
-    const sortDirs = {};
-    document.querySelectorAll("#eventsTable th.sortable").forEach(th => {
-      th.addEventListener("click", () => {
-        const col = parseInt(th.dataset.col);
-        sortDirs[col] = sortDirs[col] === "asc" ? "desc" : "asc";
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        rows.sort((a, b) => {
-          const aText = a.cells[col].textContent;
-          const bText = b.cells[col].textContent;
-          return sortDirs[col] === "asc"
-            ? aText.localeCompare(bText)
-            : bText.localeCompare(aText);
-        });
-        rows.forEach(row => tbody.appendChild(row));
-      });
-    });
   </script>
+  <script src="index-page.js"></script>
 </body>
 </html>

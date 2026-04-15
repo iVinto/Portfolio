@@ -8,7 +8,9 @@
   <meta property="og:title" content="Vinto's Portfolio — Others">
   <meta property="og:description" content="Photography by Vinto. Best viewed on desktop.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://ivinto.github.io/Portfolio/og-image.png">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="/og-image.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -51,7 +53,7 @@
     </div>
   </div>
   <img id="hoverImage" src="" alt="">
-  <footer class="index-footer" id="indexFooter">
+  <footer class="index-footer">
     <div class="brand">Vinto's</div>
     <div class="footer-links">
       <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
@@ -62,70 +64,8 @@
   <script src="protect.js"></script>
   <script src="events.js"></script>
   <script>
-    const tbody = document.getElementById("eventsBody");
-    const hoverImage = document.getElementById("hoverImage");
-    const filtersDiv = document.getElementById("filters");
-
-    // Build table rows (others only)
-    EVENTS.filter(ev => ev.category === "others" && !ev.hidden).forEach(ev => {
-      const tr = document.createElement("tr");
-      tr.className = ev.tags.join(" ");
-      tr.innerHTML = `<td>${ev.year}</td><td>${ev.title}</td>`;
-      tr.addEventListener("click", () => {
-        window.location.href = `gallery.html?event=${ev.id}`;
-      });
-      tr.addEventListener("mouseenter", () => {
-        hoverImage.src = `${ev.folder}/${ev.preview}`;
-        hoverImage.style.display = "block";
-      });
-      tr.addEventListener("mouseleave", () => {
-        hoverImage.style.display = "none";
-      });
-      tbody.appendChild(tr);
-    });
-
-    // Hover image follows mouse
-    document.addEventListener("mousemove", (e) => {
-      if (hoverImage.style.display === "block") {
-        hoverImage.style.top = e.clientY + "px";
-        hoverImage.style.left = e.clientX + "px";
-      }
-    });
-
-    // Only "All" filter
-    const btn = document.createElement("button");
-    btn.textContent = "All";
-    btn.addEventListener("click", () => {
-      tbody.querySelectorAll("tr").forEach(row => row.style.display = "");
-    });
-    filtersDiv.appendChild(btn);
-
-    // Mobile gate
-    if (sessionStorage.getItem('gateSkipped')) {
-      document.body.classList.add('gate-dismissed');
-    }
-    document.getElementById('mobileSkip').addEventListener('click', () => {
-      sessionStorage.setItem('gateSkipped', '1');
-      document.body.classList.add('gate-dismissed');
-    });
-
-    // Sortable columns
-    const sortDirs = {};
-    document.querySelectorAll("#eventsTable th.sortable").forEach(th => {
-      th.addEventListener("click", () => {
-        const col = parseInt(th.dataset.col);
-        sortDirs[col] = sortDirs[col] === "asc" ? "desc" : "asc";
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        rows.sort((a, b) => {
-          const aText = a.cells[col].textContent;
-          const bText = b.cells[col].textContent;
-          return sortDirs[col] === "asc"
-            ? aText.localeCompare(bText)
-            : bText.localeCompare(aText);
-        });
-        rows.forEach(row => tbody.appendChild(row));
-      });
-    });
+    window.PAGE_CATEGORY = "others";
   </script>
+  <script src="index-page.js"></script>
 </body>
 </html>
