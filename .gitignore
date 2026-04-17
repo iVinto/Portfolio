@@ -4,3 +4,9 @@ Thumbs.db
 
 # Original full-res images (kept locally, not deployed)
 Photography/
+
+# Claude Code settings
+.claude/
+
+# Unrelated scripts
+*.py

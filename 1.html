@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinto's Portfolio</title>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      cursor: default;
+    }
+
+    thead {
+      font-size: 14px;
+      /* Set font size for the table header */
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .filters-container {
+      padding-top: 50px;
+      flex-shrink: 1;
+      flex-grow: 1;
+      /* Grow to fill remaining space */
+      /*width: 300px; /* Set the width for the filters container */
+      padding-left: 50px;
+    }
+
+    .table-container {
+      padding-top: 50px;
+      flex-shrink: 0;
+      padding-right: 50px;
+      width: 800px;
+      /* Set the width for the filters container */
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 16px;
+      width: 100%;
+      /* Make the table fill its container */
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border: none;
+    }
+
+    thead {
+      padding-left: 0px;
+      font-size: 10px;
+      /* Adjust font size as needed */
+      font-weight: bold;
+      /* Make the text bold */
+      color: black;
+      /* Change text color */
+    }
+
+    /*th {
+       /*padding: 10px; /* Add padding for better spacing */
+       /*background-color: #f2f2f2; /* Add background color to table headers */
+       /*border-bottom: 2px solid #ddd; /* Add border to separate header from rows */
+    /*} */
+
+    .year-column {
+      width: 100px;
+      /* Set a fixed width for the year column */
+    }
+
+    #hoverImage {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      /* Allow buttons to wrap to the next line */
+      width: 100%;
+      /* Ensure the filters container uses full width */
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .filters button {
+      flex-shrink: 0;
+      border-radius: 0;
+      /* Make the border corners sharp */
+      border-color: black;
+      border-width: 1px;
+      padding: 5px 20px;
+      /* Add padding inside the buttons */
+      margin-right: 10px;
+      /* Add margin to separate the buttons horizontally */
+      margin-bottom: 10px;
+      /* Add margin to separate the buttons vertically */
+      background-color: white;
+    }
+
+    th.SEGREGACJA:hover {
+      text-decoration: underline;
+    }
+
+    tr.hoverable:hover {
+      background-color: yellow;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: left;
+      font-size: 14px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+    }
+
+    footer a {
+      color: black;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    button:hover,
+    button:focus {
+      text-decoration: underline;
+      background-color: black;
+      text-decoration-color: azure;
+      color: azure;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="filters-container">
+      <div class="filters">
+        <button onclick="resetFilters()">All</button>
+        <button onclick="toggleFilter('.FESTIVAL')">Festival</button>
+        <button onclick="toggleFilter('.CONCERT')">Concert</button>
+        <button onclick="toggleFilter('.CLUB')">Club</button>
+        <button onclick="toggleFilter('.ARENA')">Arena</button>
+        <button onclick="toggleFilter('.OPENSTAGE')">Outdoor Stage</button>
+        <button onclick="toggleFilter('.POLAND')">Polish Artist</button>
+        <button onclick="toggleFilter('.FOREIGN')">Foreign Artist</button>
+      </div>
+    </div>
+    <div class="table-container">
+      <table id="myTable">
+        <thead>
+          <tr class="ALL FESTIVAL CONCERT POLAND CLUBS OPENSTAGE FOREIGN">
+            <th class="SEGREGACJA" onclick="sortTable('myTable', 0)">YEAR<span class="arrow"></span>
+            </th>
+            <th CLASS="SEGREGACJA" onclick="sortTable('myTable', 1)">NAME<span class="arrow"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table body content -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <img id="hoverImage" src="" width="300" height="300" />
+  <script>
+    const hoverImage = document.getElementById("hoverImage");
+    const allFilterButtons = document.querySelectorAll('.filters button');
+
+    function showImage(src) {
+      hoverImage.src = src;
+      hoverImage.style.display = "block";
+      hoverImage.style.top = document.querySelector('.filters-container').offsetHeight + 'px';
+    }
+
+    function hideImage() {
+      hoverImage.style.display = "none";
+    }
+
+    const sortingDirections = {};
+
+    function sortTable(tableId, columnIndex) {
+      const table = document.getElementById(tableId);
+      const rows = Array.from(table.rows).slice(1); // Skip the header row
+
+      if (!sortingDirections[columnIndex]) {
+        sortingDirections[columnIndex] = 'asc'; // Default to ascending
+      } else if (sortingDirections[columnIndex] === 'asc') {
+        sortingDirections[columnIndex] = 'desc'; // Change to descending
+      } else {
+        sortingDirections[columnIndex] = 'asc'; // Change to ascending
+      }
+
+      rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].innerText;
+        const bText = b.cells[columnIndex].innerText;
+        let result;
+
+        if (sortingDirections[columnIndex] === 'asc') {
+          result = aText.localeCompare(bText);
+        } else {
+          result = bText.localeCompare(aText);
+        }
+
+        return result;
+      });
+
+      const tbody = table.querySelector("tbody");
+      rows.forEach(row => tbody.appendChild(row));
+    }
+
+    function toggleFilter(selector) {
+      resetFilters(); // Reset filters before applying new ones
+
+      const nonFilteredRows = document.querySelectorAll(`tr:not(${selector})`);
+      nonFilteredRows.forEach(row => {
+        if (row.style.display === "none" || row.style.display === "") {          row.style.display = "table-row";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+
+    function resetFilters() {
+      // Remove the 'active' class from all filter buttons
+      allFilterButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Show all rows by setting their display property to 'table-row'
+      const allRows = document.querySelectorAll('tr.hoverable');
+      allRows.forEach(row => {
+        row.style.display = "table-row";
+      });
+    }
+  </script>
+  <footer>
+    <div style="color:rgba(0, 0, 0, 1);font-size:54px;font-family:Arial;letter-spacing:-5.8px;font-style:normal;font-weight:700;text-transform:none;margin-bottom:20px;">
+      Vinto's
+    </div>
+
+    <a href="mailto:maciejvinto@gmail.com">maciejvinto@gmail.com</a>
+    <a href="https://www.instagram.com/by.vinto" target="_blank">@by.vinto</a>
+  </footer>
+
+</body>
+
+</html>
+
+         

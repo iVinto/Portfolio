@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinto's Young Multi SBM FFESTIVAL 2023</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: black;
+      overflow: scroll;
+      transition: background-color 1s, color 1s;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      padding-top: 3.75rem;
+      padding-bottom: 3.75rem;
+    }
+    .grid img {
+      width: 100%;
+      cursor: pointer;
+    }
+    .fullscreen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: inherit;
+      z-index: 2;
+    }
+    .fullscreen img {
+      max-width: 80%;
+      max-height: 80%;
+      position: absolute;
+    }
+    .controls {
+      position: fixed;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3; /* Ensure controls are above the images */
+      display: flex;
+      gap: 3.75rem;
+    }
+    .controls button {
+      margin: 0.25rem;
+      padding: 0.75rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      position: relative;
+    }
+    .controls button.selected::before {
+      content: '[•] ';
+    }
+    .controls button.unselected::before {
+      content: '[ ] ';
+    }
+    .controlsTOP {
+      position: fixed;
+      top: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3; /* Ensure controls are above the images */
+      display: flex;
+      gap: 3.75rem;
+    }
+    .controlsTOP button {
+      margin: 0.25rem;
+      padding: 0.75rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      position: relative;
+    }
+    .controlsTOP button.selected::before {
+      content: '[•] ';
+    }
+    .controlsTOP button.unselected::before {
+      content: '[ ] ';
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; /* Adjusted to be below the controlsTOP buttons */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2; /* Positioned below the controlsTOP */
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .overlay.visible {
+      display: flex;
+      opacity: 1;
+    }
+    .overlay .content {
+      text-align: left;
+      font-size: 24px;
+      color: inherit;
+    }
+    .overlay .paddingOVERLAY{
+      padding-top: 0.75rem;
+      padding-bottom: 2.5em;
+    }
+    .overlay .aboutDATE{
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="controlsTOP">
+    <button id="portfolioButton" onclick="goToPage('Portfolio.html')">Portfolio</button>
+    <button id="aboutButton" onclick="toggleOverlay()">About</button>
+    <button id="indexButton" onclick="showGrid()">Index</button>
+  </div>
+  <div class="grid">
+    <img src="./Photography/YoungMultiSBM2023/1.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 1" data-index="0">
+    <img src="./Photography/YoungMultiSBM2023/2.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 2" data-index="1">
+    <img src="./Photography/YoungMultiSBM2023/3.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 3" data-index="2">
+    <img src="./Photography/YoungMultiSBM2023/4.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 4" data-index="3">
+    <img src="./Photography/YoungMultiSBM2023/5.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 5" data-index="4">
+    <img src="./Photography/YoungMultiSBM2023/6.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 6" data-index="5">
+    <img src="./Photography/YoungMultiSBM2023/7.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 7" data-index="6">
+    <img src="./Photography/YoungMultiSBM2023/8.jpg" alt="Young Multi SBM FFESTIVAL 2023 Image 8" data-index="7">
+  </div>
+  <div class="fullscreen">
+    <img src="" alt="Fullscreen Image">
+  </div>
+  <div class="controls">
+    <button id="whiteButton" onclick="changeBackgroundColor('#fff')">White Background</button>
+    <button id="blackButton" onclick="changeBackgroundColor('#000')">Black Background</button>
+  </div>
+  <div class="overlay" id="overlay">
+    <div class="content">
+      <div style="font-style:normal; font-size: 20px;">YOUNG MULTI SBM FFESTIVAL 2023</div>
+      <div class="paddingOVERLAY" style="font-size: 16px;">Personal project.</div>
+      <div class="aboutDATE" style="font-style:italic;font-size: 12px;">26.08.2023</div>
+      <div class="aboutDATE" style="font-style:italic;font-size: 12px;">Warsaw, Bemowo Airport</div>
+    </div>
+  </div>
+
+  <script>
+    const gridImages = document.querySelectorAll('.grid img');
+    const fullscreenDiv = document.querySelector('.fullscreen');
+    const fullscreenImg = document.querySelector('.fullscreen img');
+    const whiteButton = document.getElementById('whiteButton');
+    const blackButton = document.getElementById('blackButton');
+    const indexButton = document.getElementById('indexButton');
+    const aboutButton = document.getElementById('aboutButton');
+    const portfolioButton = document.getElementById('portfolioButton');
+    const overlay = document.getElementById('overlay');
+    let currentIndex = 0;
+    let isFullscreen = false;
+    let isOverlayVisible = false;
+
+    gridImages.forEach(img => {
+      img.addEventListener('click', (e) => {
+        currentIndex = parseInt(img.getAttribute('data-index'));
+        showFullscreen(img, e);
+      });
+    });
+
+    function showFullscreen(img, event) {
+      isFullscreen = true;
+      updateButtonSelection();
+      const rect = img.getBoundingClientRect();
+      fullscreenImg.src = img.src;
+      fullscreenImg.style.left = `${rect.left}px`;
+      fullscreenImg.style.top = `${rect.top}px`;
+      fullscreenImg.style.width = `${rect.width}px`;
+      fullscreenImg.style.height = `${rect.height}px`;
+
+      gridImages.forEach(img => img.style.opacity = '0.1');
+      fullscreenDiv.style.display = 'flex';
+
+      setTimeout(() => {
+        fullscreenImg.style.transform = 'translate(-50%, -50%) scale(1)';
+        fullscreenImg.style.left = '50%';
+        fullscreenImg.style.top = '50%';
+        fullscreenImg.style.width = '';
+        fullscreenImg.style.height = '';
+      }, 0);
+    }
+
+    function showGrid() {
+      isFullscreen = false;
+      isOverlayVisible = false;
+      updateButtonSelection();
+      fullscreenDiv.style.display = 'none';
+      fullscreenImg.style.transform = 'scale(0)';
+      gridImages.forEach(img => img.style.opacity = '1');
+      overlay.classList.remove('visible');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 1000); // Wait for the fade-out transition to complete
+    }
+
+    function changeBackgroundColor(color) {
+      const currentColor = document.body.style.backgroundColor;
+      document.body.style.backgroundColor = color;
+      fullscreenDiv.style.backgroundColor = color;
+      overlay.style.backgroundColor = color === '#000' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
+      document.body.style.color = color === '#000' ? '#fff' : '#000';
+      document.querySelector('.overlay .content').style.color = color === '#000' ? '#fff' : '#000';
+      
+      // Trigger reflow to reset transition
+      void document.body.offsetWidth;
+      void fullscreenDiv.offsetWidth;
+
+      // Apply color transition
+      document.body.style.transition = 'background-color 0.5s ease, color 0.5s ease';
+      fullscreenDiv.style.transition = 'background-color 0.5s ease';
+      
+      updateButtonSelection();
+    }
+
+    function updateButtonSelection() {
+      whiteButton.classList.remove('selected');
+      whiteButton.classList.add('unselected');
+      blackButton.classList.remove('selected');
+      blackButton.classList.add('unselected');
+      indexButton.classList.remove('selected');
+      indexButton.classList.add('unselected');
+      portfolioButton.classList.remove('selected');
+      portfolioButton.classList.add('unselected');
+      aboutButton.classList.remove('selected');
+      aboutButton.classList.add('unselected');
+      
+      const currentBgColor = document.body.style.backgroundColor;
+      if (currentBgColor === 'rgb(0, 0, 0)') {
+        blackButton.classList.add('selected');
+        blackButton.classList.remove('unselected');
+      } else {
+        whiteButton.classList.add('selected');
+        whiteButton.classList.remove('unselected');
+      }
+      
+      if (!isFullscreen && !isOverlayVisible) {
+        indexButton.classList.add('selected');
+        indexButton.classList.remove('unselected');
+      }
+      if (isOverlayVisible) {
+        aboutButton.classList.add('selected');
+        aboutButton.classList.remove('unselected');
+      }
+    }
+
+    function toggleOverlay() {
+      isOverlayVisible = !isOverlayVisible;
+      if (isOverlayVisible) {
+        overlay.style.display = 'flex';
+        setTimeout(() => {
+          overlay.classList.add('visible');
+        }, 0); // Delay to trigger the transition
+      } else {
+        overlay.classList.remove('visible');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 1000); // Wait for the fade-out transition to complete
+      }
+      updateButtonSelection();
+    }
+
+    fullscreenDiv.addEventListener('click', (e) => {
+      if (e.clientX > window.innerWidth / 2) {
+        navigateToNextImage();
+      } else {
+        navigateToPreviousImage();
+      }
+    });
+
+    function navigateToNextImage() {
+      currentIndex = (currentIndex + 1) % gridImages.length;
+      fullscreenImg.src = gridImages[currentIndex].src;
+    }
+
+    function navigateToPreviousImage() {
+      currentIndex = (currentIndex - 1 + gridImages.length) % gridImages.length;
+      fullscreenImg.src = gridImages[currentIndex].src;
+    }
+
+    // Add event listener for keydown events
+    document.addEventListener('keydown', (e) => {
+      if (isFullscreen) {
+        if (e.key === 'ArrowRight') {
+          navigateToNextImage();
+        } else if (e.key === 'ArrowLeft') {
+          navigateToPreviousImage();
+        }
+      }
+    });
+
+    window.addEventListener('load', updateButtonSelection);
+
+    function goToPage(url) {
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
