@@ -38,8 +38,6 @@
     const img = document.createElement("img");
     const label = imageLabel(i);
     img.alt = label;
-    img.title = label;
-    img.dataset.caption = label;
     img.dataset.index = i;
     img.decoding = "async";
 
@@ -82,17 +80,16 @@
   grid.addEventListener("click", (e) => {
     if (e.target.tagName === "IMG") {
       currentIndex = parseInt(e.target.dataset.index);
-      showFullscreen(e.target);
+      showFullscreen(e.target, e);
     }
   });
 
-  function showFullscreen(img) {
+  function showFullscreen(img, pointerEvent) {
     isFullscreen = true;
     updateButtons();
     const rect = img.getBoundingClientRect();
     fullscreenImg.src = img.src;
     fullscreenImg.alt = imageLabel(currentIndex);
-    fullscreenImg.title = imageLabel(currentIndex);
     fullscreenImg.style.left = `${rect.left}px`;
     fullscreenImg.style.top = `${rect.top}px`;
     fullscreenImg.style.width = `${rect.width}px`;
@@ -101,6 +98,7 @@
     gridImages().forEach(img => img.style.opacity = "0.1");
     fullscreenDiv.style.display = "flex";
     updateCounter();
+    if (pointerEvent) updateCursorDirection(pointerEvent);
 
     requestAnimationFrame(() => {
       fullscreenImg.style.transform = "translate(-50%, -50%) scale(1)";
@@ -108,6 +106,7 @@
       fullscreenImg.style.top = "50%";
       fullscreenImg.style.width = "";
       fullscreenImg.style.height = "";
+      queueCounterPositionUpdate();
     });
   }
 
@@ -117,6 +116,7 @@
     updateButtons();
     fullscreenDiv.style.display = "none";
     fullscreenImg.style.transform = "scale(0)";
+    fullscreenDiv.classList.remove("cursor-left", "cursor-right");
     gridImages().forEach(img => img.style.opacity = "1");
     overlay.classList.remove("visible");
     galleryCounter.style.display = "none";
@@ -182,6 +182,26 @@
   function updateCounter() {
     galleryCounter.textContent = `${currentIndex + 1} / ${event.images.length}`;
     galleryCounter.style.display = isFullscreen ? "block" : "none";
+    if (isFullscreen) queueCounterPositionUpdate();
+  }
+
+  function queueCounterPositionUpdate() {
+    requestAnimationFrame(() => requestAnimationFrame(updateCounterPosition));
+  }
+
+  function updateCounterPosition() {
+    if (!isFullscreen) return;
+    const rect = fullscreenImg.getBoundingClientRect();
+    galleryCounter.style.left = `${Math.min(window.innerWidth - galleryCounter.offsetWidth - 12, rect.right + 12)}px`;
+    galleryCounter.style.top = `${rect.bottom - galleryCounter.offsetHeight}px`;
+  }
+
+  function updateCursorDirection(e) {
+    if (!isFullscreen) return;
+    const rect = fullscreenImg.getBoundingClientRect();
+    const isRightSide = e.clientX > rect.left + rect.width / 2;
+    fullscreenDiv.classList.toggle("cursor-left", !isRightSide);
+    fullscreenDiv.classList.toggle("cursor-right", isRightSide);
   }
 
   function setMeta(name, content) {
@@ -197,16 +217,20 @@
   // Fullscreen navigation
   fullscreenDiv.addEventListener("click", (e) => {
     const imgs = gridImages();
-    if (e.clientX > window.innerWidth / 2) {
+    const rect = fullscreenImg.getBoundingClientRect();
+    if (e.clientX > rect.left + rect.width / 2) {
       currentIndex = (currentIndex + 1) % imgs.length;
     } else {
       currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
     }
     fullscreenImg.src = imgs[currentIndex].src;
     fullscreenImg.alt = imageLabel(currentIndex);
-    fullscreenImg.title = imageLabel(currentIndex);
     updateCounter();
   });
+
+  fullscreenDiv.addEventListener("mousemove", updateCursorDirection);
+  fullscreenImg.addEventListener("load", queueCounterPositionUpdate);
+  window.addEventListener("resize", queueCounterPositionUpdate);
 
   document.addEventListener("keydown", (e) => {
     if (!isFullscreen) return;
@@ -215,13 +239,11 @@
       currentIndex = (currentIndex + 1) % imgs.length;
       fullscreenImg.src = imgs[currentIndex].src;
       fullscreenImg.alt = imageLabel(currentIndex);
-      fullscreenImg.title = imageLabel(currentIndex);
       updateCounter();
     } else if (e.key === "ArrowLeft") {
       currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
       fullscreenImg.src = imgs[currentIndex].src;
       fullscreenImg.alt = imageLabel(currentIndex);
-      fullscreenImg.title = imageLabel(currentIndex);
       updateCounter();
     } else if (e.key === "Escape") {
       showGrid();

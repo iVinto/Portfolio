@@ -61,13 +61,42 @@ assert(!indexHtml.includes("mobileGate"), "Mobile should use a simplified respon
 assert(indexHtml.includes("mobile-experience-note"), "Index needs the desktop-experience note for mobile visitors.");
 
 const galleryHtml = read("gallery.html");
+const galleryJs = read("gallery.js");
+const styleCss = read("style.css");
 assert(!galleryHtml.includes("protect.js"), "Gallery should not block saving or source shortcuts.");
 assert(galleryHtml.includes("mobile-experience-note"), "Gallery needs the desktop-experience note for mobile visitors.");
+assert(!/(\bimg|\bfullscreenImg)\.title\s*=/.test(galleryJs), "Gallery images should not set title attributes that create native cursor tooltips.");
+assert(!galleryJs.includes("dataset.caption"), "Gallery images should not carry redundant caption data.");
+assert(
+  galleryJs.includes("function updateCounterPosition()") && galleryJs.includes("fullscreenImg.getBoundingClientRect()"),
+  "Fullscreen counter should be positioned from the rendered image bounds."
+);
+assert(galleryJs.includes("galleryCounter.offsetWidth"), "Fullscreen counter positioning should account for its rendered width.");
+assert(
+  galleryJs.includes("function updateCursorDirection") && galleryJs.includes("cursor-left") && galleryJs.includes("cursor-right"),
+  "Fullscreen navigation should update left/right cursor direction classes."
+);
+assert(
+  galleryJs.includes("rect.left + rect.width / 2") && !galleryJs.includes("window.innerWidth / 2"),
+  "Fullscreen click and cursor direction should use the rendered image halves, not the whole viewport."
+);
+assert(
+  styleCss.includes("height: 34px;") && styleCss.includes("align-items: center;"),
+  "Filter buttons should use a compact fixed height with centered text."
+);
+assert(!styleCss.includes("translateX(-50%)"), "Gallery counter should not be centered under the fullscreen image.");
+assert(styleCss.includes("white-space: nowrap;"), "Gallery counter should stay on one line.");
+assert(styleCss.includes("cursor-left") && styleCss.includes("cursor-right"), "Left/right fullscreen cursor classes should exist.");
 assert(fs.existsSync(path.join(root, "robots.txt")), "robots.txt should exist.");
 assert(fs.existsSync(path.join(root, "sitemap.xml")), "sitemap.xml should exist.");
 
 const referenced = new Set();
 for (const event of events) {
+  assert(event.about.description.trim(), `About description should not be empty for ${event.id}.`);
+  assert(
+    !/(personal project|experimental personal project|photo relation|media team work|work for)/i.test(event.about.description),
+    `About description should be specific and polished for ${event.id}: ${event.about.description}`
+  );
   for (const image of event.images) referenced.add(path.join(event.folder, image));
   referenced.add(path.join(event.folder, event.preview));
 }

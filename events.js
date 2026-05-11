@@ -31,7 +31,7 @@ const EVENTS = [
     preview: "3.webp",
     about: {
       title: "CLOUT FESTIVAL 4.0",
-      description: "Festival Media Team work for CLOUT/BIG IDEA.",
+      description: "Selected festival coverage created for CLOUT / BIG IDEA, focused on live performance, audience energy and the scale of the site.",
       date: "11–12.07.2025",
       location: "Bemowo Airport, Warsaw, Poland"
     }
@@ -48,7 +48,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "FKA TWIGS AT OPEN'ER FESTIVAL 2025",
-      description: "Photo relation for Radio 357.",
+      description: "Festival coverage prepared for Radio 357 during Open'er Festival 2025.",
       date: "04.07.2025",
       location: "Lotnisko Gdynia-Kosakowo, Gdynia, Poland"
     }
@@ -65,7 +65,7 @@ const EVENTS = [
     preview: "9.webp",
     about: {
       title: "KUBAN AT OPEN'ER FESTIVAL 2025",
-      description: "Photo relation for Radio 357.",
+      description: "Festival coverage prepared for Radio 357 during Open'er Festival 2025.",
       date: "05.07.2025",
       location: "Lotnisko Gdynia-Kosakowo, Gdynia, Poland"
     }
@@ -83,7 +83,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "KUQE 2115 — NARESZCIE W TRASIE VOL. 2",
-      description: "Photo relation from tour for artist, booking and management. Promotional shoots and backstage.",
+      description: "Tour documentation covering live performance, promotional moments and backstage atmosphere for the artist team.",
       date: "11–12.2025",
       location: "Poland"
     }
@@ -100,7 +100,7 @@ const EVENTS = [
     preview: "4.webp",
     about: {
       title: "TRIPPIE REDD AT CLOUT FESTIVAL 3.0",
-      description: "Festival Media Team work for CLOUT/BIG IDEA.",
+      description: "Festival coverage created for CLOUT / BIG IDEA, focused on the show, crowd response and backstage rhythm.",
       date: "13.07.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -117,7 +117,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "POLAND - PORTUGAL / PORTO",
-      description: "",
+      description: "A travel and matchday photo story from Porto, built around the city, movement and the Poland - Portugal fixture.",
       date: "15.11.2024",
       location: "Porto, Portugal"
     }
@@ -134,7 +134,7 @@ const EVENTS = [
     preview: "4.webp",
     about: {
       title: "YEAT AT ORANGE WARSAW FESTIVAL",
-      description: "Photo relation from OWF for a media outlet.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
       date: "08.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -151,7 +151,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "YUNGBLUD AT ORANGE WARSAW FESTIVAL",
-      description: "Photo relation from OWF for a media outlet.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
       date: "07.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -168,7 +168,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "KEN CARSON AT ORANGE WARSAW FESTIVAL",
-      description: "Photo relation from OWF for a media outlet.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
       date: "07.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -185,7 +185,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "BAMBI IRL TOUR",
-      description: "Experimental personal project.",
+      description: "A compact live story from the Warsaw stop of IRL Tour, focused on stage language, styling and fan energy.",
       date: "12.04.2024",
       location: "Warsaw, Progresja"
     }
@@ -202,7 +202,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "YOUNG MULTI AT SBMFFESTIVAL 2023",
-      description: "Personal project.",
+      description: "Festival coverage from SBMFFestival 2023, built around performance dynamics and the summer crowd at Bemowo.",
       date: "26.08.2023",
       location: "Warsaw, Bemowo Airport"
     }
@@ -219,7 +219,7 @@ const EVENTS = [
     preview: "11.webp",
     about: {
       title: "SBMFFESTIVAL 2023",
-      description: "Photo relation from SBM for a media outlet.",
+      description: "Festival coverage from SBMFFestival 2023, documenting the scale of the event across several days.",
       date: "23-26.08.2023",
       location: "Bemowo Airport, Warsaw, Poland"
     }
@@ -240,7 +240,7 @@ const EVENTS = [
     preview: "5.webp",
     about: {
       title: "CLOUT FESTIVAL 2.0",
-      description: "Festival Media Team work for CLOUT/BIG IDEA.",
+      description: "Festival coverage created for CLOUT / BIG IDEA, focused on performances, site atmosphere and audience density.",
       date: "08-09.07.2023",
       location: "Legia Stadion, Warsaw, Poland"
     }
@@ -257,7 +257,7 @@ const EVENTS = [
     preview: "9.webp",
     about: {
       title: "ŻABSON OSTATNI ZIOMAL TOUR 2023",
-      description: "Personal project.",
+      description: "Arena concert coverage from the Warsaw stop of Ostatni Ziomal Tour, focused on staging, movement and scale.",
       date: "01.04.2023",
       location: "Warsaw, Torwar"
     }
@@ -274,7 +274,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "MATA TOUR GLIWICE",
-      description: "Final documentation of the tour.",
+      description: "Tour documentation from the Gliwice finale, focused on production scale, stage design and crowd response.",
       date: "28.01.2023",
       location: "Gliwice, Arena Gliwice"
     }
@@ -291,7 +291,7 @@ const EVENTS = [
     preview: "3.webp",
     about: {
       title: "ROAD TO CLOUT: PI'ERRE BOURNE",
-      description: "Work for CLOUT/BIG IDEA.",
+      description: "Club show coverage from Road to CLOUT, created around the intimacy and pressure of the room.",
       date: "11.11.2022",
       location: "Legia Stadion, Warsaw, Poland"
     }
@@ -311,7 +311,7 @@ const EVENTS = [
     preview: "7.webp",
     about: {
       title: "MATA TOUR :) 2022",
-      description: "Summer tour concert relation for MATA/GOMBAO33.",
+      description: "Summer tour documentation for MATA / GOMBAO33 across Krakow, Poznan and Lodz.",
       date: "2022",
       location: "Krakow / Poznan / Lodz, Poland"
     }
@@ -328,7 +328,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "WHITE 2115 PRETTY BOY TOUR",
-      description: "Personal project.",
+      description: "Outdoor concert coverage from Pretty Boy Tour, focused on the artist, crowd and late-summer stage atmosphere.",
       date: "16.09.2022",
       location: "Progresja, Warsaw"
     }
@@ -345,7 +345,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "JAKUB ON STAGE MEGA HIP-HOP TOUR",
-      description: "Personal project.",
+      description: "Concert coverage from Mega Hip-Hop Tour, built around local scale, stage movement and audience contact.",
       date: "02.09.2022",
       location: "Zielonka, Poland"
     }
@@ -362,7 +362,7 @@ const EVENTS = [
     preview: "6.webp",
     about: {
       title: "BRACIA KACPERCZYK AT SBMFFESTIVAL 2022",
-      description: "Personal project.",
+      description: "Festival coverage from SBMFFestival 2022, focused on the band's live energy and open-air setting.",
       date: "25.08.2022",
       location: "Bemowo Airport, Warsaw"
     }
@@ -379,7 +379,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "MŁODY KLAKSON AT SBMFFESTIVAL 2022",
-      description: "Personal project.",
+      description: "Festival coverage from SBMFFestival 2022, focused on raw stage movement and the Bemowo crowd.",
       date: "26.08.2022",
       location: "Bemowo Airport, Warsaw"
     }
@@ -396,7 +396,7 @@ const EVENTS = [
     preview: "3.webp",
     about: {
       title: "MATA BEMOWO 2021",
-      description: "Personal project.",
+      description: "Outdoor concert coverage from Bemowo, documenting an early large-scale MATA show in Warsaw.",
       date: "2021",
       location: "Bemowo, Warsaw"
     }

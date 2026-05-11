@@ -87,13 +87,18 @@ a:hover {
 
 .filters button {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
   border-radius: 0;
   border: 1px solid black;
-  padding: 0.5rem 1.25rem;
+  padding: 0 1.25rem;
   background-color: white;
   cursor: pointer;
   font-family: Arial, sans-serif;
   font-size: 14px;
+  line-height: 1;
   transition: none;
 }
 
@@ -238,6 +243,7 @@ a:hover {
   height: 100vh;
   background-color: inherit;
   z-index: 2;
+  cursor: default;
 }
 
 .fullscreen img {
@@ -246,14 +252,22 @@ a:hover {
   position: absolute;
 }
 
+.fullscreen.cursor-left,
+.fullscreen.cursor-left img {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M25 10 15 20l10 10' fill='none' stroke='black' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M25 10 15 20l10 10' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 20 20, w-resize;
+}
+
+.fullscreen.cursor-right,
+.fullscreen.cursor-right img {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M15 10 25 20 15 30' fill='none' stroke='black' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 10 25 20 15 30' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 20 20, e-resize;
+}
+
 .gallery-counter {
   position: fixed;
-  bottom: 4.25rem;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 4;
   display: none;
   font-size: 12px;
+  white-space: nowrap;
   color: inherit;
   background-color: inherit;
   padding: 0.25rem 0.5rem;
@@ -332,6 +346,7 @@ a:hover {
   text-align: left;
   font-size: 24px;
   color: inherit;
+  max-width: min(620px, calc(100vw - 3rem));
 }
 
 .overlay .about-title {
