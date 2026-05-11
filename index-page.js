@@ -1,9 +1,9 @@
 /**
- * Shared logic for index pages (index.html, editorials.html, others.html)
+ * Shared logic for the portfolio index.
  *
  * Each page sets these globals before loading this script:
- *   window.PAGE_CATEGORY  — "concerts" | "editorials" | "others"
- *   window.PAGE_FILTERS   — array of filter config objects (optional; omit for "All" only)
+ *   window.PAGE_CATEGORY  - "concerts"
+ *   window.PAGE_FILTERS   - array of filter config objects
  *
  * Filter config object shape:
  *   { label: string, tag: string|null, group: string|null }
@@ -20,13 +20,21 @@
   EVENTS.filter(ev => ev.category === category && !ev.hidden).forEach(ev => {
     const tr = document.createElement("tr");
     tr.className = ev.tags.join(" ");
-    tr.innerHTML = `<td>${ev.year}</td><td>${ev.title}</td>`;
+    const previewSrc = `${ev.folder}/${ev.preview}`;
+    tr.innerHTML = `
+      <td class="year-cell">${ev.year}</td>
+      <td class="event-cell">
+        <img class="row-preview" src="${previewSrc}" alt="${ev.title} preview" loading="lazy" decoding="async">
+        <span>${ev.title}</span>
+      </td>
+    `;
 
     tr.addEventListener("click", () => {
       window.location.href = `gallery.html?event=${ev.id}`;
     });
     tr.addEventListener("mouseenter", () => {
-      hoverImg.src = `${ev.folder}/${ev.preview}`;
+      hoverImg.src = previewSrc;
+      hoverImg.alt = `${ev.title} preview`;
       hoverImg.style.display = "block";
     });
     tr.addEventListener("mouseleave", () => {
@@ -99,16 +107,6 @@
     });
     filterDiv.appendChild(btn);
   }
-
-  /* ── Mobile gate ──────────────────────────────────────────── */
-
-  if (sessionStorage.getItem("gateSkipped")) {
-    document.body.classList.add("gate-dismissed");
-  }
-  document.getElementById("mobileSkip").addEventListener("click", () => {
-    sessionStorage.setItem("gateSkipped", "1");
-    document.body.classList.add("gate-dismissed");
-  });
 
   /* ── Sortable columns ─────────────────────────────────────── */
 

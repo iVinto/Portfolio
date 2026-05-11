@@ -20,6 +20,14 @@
 
   // Set page title
   document.title = `Vinto's ${event.about.title}`;
+  setMeta("description", `${event.about.title}. ${event.about.description} Photography by Vinto.`);
+  setMeta("twitter:title", `Vinto's ${event.about.title}`);
+  setMeta("twitter:description", `${event.about.title}. ${event.about.description}`);
+  setMetaProperty("og:title", `Vinto's ${event.about.title}`);
+  setMetaProperty("og:description", `${event.about.title}. ${event.about.description}`);
+  setMetaProperty("og:url", `https://vinto-portfolio.pages.dev/gallery.html?event=${event.id}`);
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = `https://vinto-portfolio.pages.dev/gallery.html?event=${event.id}`;
 
   // Build grid
   const grid = document.querySelector(".gallery-grid");
@@ -28,7 +36,10 @@
   // Load first few images eagerly, lazy-load the rest
   event.images.forEach((filename, i) => {
     const img = document.createElement("img");
-    img.alt = `${event.title} — Photo ${i + 1}`;
+    const label = imageLabel(i);
+    img.alt = label;
+    img.title = label;
+    img.dataset.caption = label;
     img.dataset.index = i;
     img.decoding = "async";
 
@@ -65,6 +76,7 @@
   const indexBtn = document.getElementById("indexButton");
   const aboutBtn = document.getElementById("aboutButton");
   const portfolioBtn = document.getElementById("portfolioButton");
+  const galleryCounter = document.getElementById("galleryCounter");
 
   // Click handlers on grid images (delegated)
   grid.addEventListener("click", (e) => {
@@ -79,6 +91,8 @@
     updateButtons();
     const rect = img.getBoundingClientRect();
     fullscreenImg.src = img.src;
+    fullscreenImg.alt = imageLabel(currentIndex);
+    fullscreenImg.title = imageLabel(currentIndex);
     fullscreenImg.style.left = `${rect.left}px`;
     fullscreenImg.style.top = `${rect.top}px`;
     fullscreenImg.style.width = `${rect.width}px`;
@@ -86,6 +100,7 @@
 
     gridImages().forEach(img => img.style.opacity = "0.1");
     fullscreenDiv.style.display = "flex";
+    updateCounter();
 
     requestAnimationFrame(() => {
       fullscreenImg.style.transform = "translate(-50%, -50%) scale(1)";
@@ -104,6 +119,7 @@
     fullscreenImg.style.transform = "scale(0)";
     gridImages().forEach(img => img.style.opacity = "1");
     overlay.classList.remove("visible");
+    galleryCounter.style.display = "none";
     setTimeout(() => { overlay.style.display = "none"; }, 500);
   };
 
@@ -131,10 +147,12 @@
     const controlsBottom = document.querySelector(".controls-bottom");
     controlsTop.style.backgroundColor = color;
     controlsBottom.style.backgroundColor = color;
+    galleryCounter.style.backgroundColor = color;
 
     // Update button text color
     controlsTop.querySelectorAll("button").forEach(b => b.style.color = isDark ? "#fff" : "#000");
     controlsBottom.querySelectorAll("button").forEach(b => b.style.color = isDark ? "#fff" : "#000");
+    galleryCounter.style.color = isDark ? "#fff" : "#000";
 
     updateButtons();
   };
@@ -157,6 +175,25 @@
     btn.classList.toggle("unselected", !selected);
   }
 
+  function imageLabel(index) {
+    return `${event.about.title} - photo ${index + 1} of ${event.images.length}`;
+  }
+
+  function updateCounter() {
+    galleryCounter.textContent = `${currentIndex + 1} / ${event.images.length}`;
+    galleryCounter.style.display = isFullscreen ? "block" : "none";
+  }
+
+  function setMeta(name, content) {
+    const tag = document.querySelector(`meta[name="${name}"]`);
+    if (tag) tag.content = content;
+  }
+
+  function setMetaProperty(property, content) {
+    const tag = document.querySelector(`meta[property="${property}"]`);
+    if (tag) tag.content = content;
+  }
+
   // Fullscreen navigation
   fullscreenDiv.addEventListener("click", (e) => {
     const imgs = gridImages();
@@ -166,6 +203,9 @@
       currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
     }
     fullscreenImg.src = imgs[currentIndex].src;
+    fullscreenImg.alt = imageLabel(currentIndex);
+    fullscreenImg.title = imageLabel(currentIndex);
+    updateCounter();
   });
 
   document.addEventListener("keydown", (e) => {
@@ -174,9 +214,15 @@
     if (e.key === "ArrowRight") {
       currentIndex = (currentIndex + 1) % imgs.length;
       fullscreenImg.src = imgs[currentIndex].src;
+      fullscreenImg.alt = imageLabel(currentIndex);
+      fullscreenImg.title = imageLabel(currentIndex);
+      updateCounter();
     } else if (e.key === "ArrowLeft") {
       currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
       fullscreenImg.src = imgs[currentIndex].src;
+      fullscreenImg.alt = imageLabel(currentIndex);
+      fullscreenImg.title = imageLabel(currentIndex);
+      updateCounter();
     } else if (e.key === "Escape") {
       showGrid();
     }

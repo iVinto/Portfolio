@@ -2,44 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vinto's Portfolio</title>
-  <meta name="description" content="Concert and festival photography portfolio by Vinto. Best viewed on desktop.">
+  <meta name="description" content="Concert and festival photography portfolio by Maciej Kowalski, working as Vinto. Based in Warsaw and available worldwide.">
+  <link rel="canonical" href="https://vinto-portfolio.pages.dev/">
   <meta property="og:title" content="Vinto's Portfolio">
-  <meta property="og:description" content="Concert and festival photography by Vinto. Best viewed on desktop.">
+  <meta property="og:description" content="Concert and festival photography by Maciej Kowalski, working as Vinto.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinto-portfolio.pages.dev/">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vinto's Portfolio">
-  <meta name="twitter:description" content="Concert and festival photography by Vinto. Best viewed on desktop.">
+  <meta name="twitter:description" content="Concert and festival photography by Maciej Kowalski, working as Vinto.">
   <meta name="twitter:image" content="/og-image.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260511">
 </head>
 <body>
-  <div id="mobileGate">
-    <p>Full experience available on desktop</p>
-    <button id="mobileSkip">nevermind</button>
-  </div>
   <div class="index-container">
     <div class="filters-container">
       <div class="filters" id="filters"></div>
-      <div class="category-nav">
-        <a href="index.html" class="active">Concerts</a>
-        <a href="editorials.html">Editorials</a>
-        <a href="others.html">Others</a>
-      </div>
+      <p class="mobile-experience-note">Simplified mobile view. Full experience is best on desktop.</p>
       <div class="info-section">
         <div class="info-content">
           <p>Maciej Kowalski / Art Direction & Photography</p>
           <p>Based in Warsaw, Poland / Available worldwide.</p>
           <p>Architecture student. Music & festival photography, PR shoots, commercial, editorials, mixed media, creative direction.</p>
           <p>Worked with: 2115, Big Idea, Clout Festival, MATA, Radio 357, SBM ...</p>
-          <img src="Photography_web/vinto-portrait.webp" alt="Vinto" class="info-portrait">
+          <img src="Photography_web/vinto-portrait.webp" alt="Portrait of Maciej Kowalski, Vinto" class="info-portrait" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -64,8 +58,7 @@
     </div>
   </footer>
 
-  <script src="protect.js"></script>
-  <script src="events.js"></script>
+  <script src="events.js?v=20260511"></script>
   <script>
     window.PAGE_CATEGORY = "concerts";
     window.PAGE_FILTERS = [
@@ -79,6 +72,6 @@
       { label: "Foreign Artist", tag: "FOREIGN",  group: "origin" }
     ];
   </script>
-  <script src="index-page.js"></script>
+  <script src="index-page.js?v=20260511"></script>
 </body>
 </html>

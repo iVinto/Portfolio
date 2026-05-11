@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vinto-portfolio.pages.dev/sitemap.xml

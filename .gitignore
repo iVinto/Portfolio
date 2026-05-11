@@ -8,5 +8,8 @@ Photography/
 # Claude Code settings
 .claude/
 
+# Cloudflare/Wrangler local cache
+.wrangler/
+
 # Unrelated scripts
 *.py

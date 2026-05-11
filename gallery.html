@@ -2,36 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vinto's Portfolio</title>
-  <meta name="description" content="Concert photography by Vinto. Best viewed on desktop.">
+  <meta name="description" content="Concert and festival photography by Maciej Kowalski, working as Vinto.">
+  <link rel="canonical" href="https://vinto-portfolio.pages.dev/gallery.html">
   <meta property="og:title" content="Vinto's Portfolio">
-  <meta property="og:description" content="Concert and festival photography by Vinto.">
+  <meta property="og:description" content="Concert and festival photography by Maciej Kowalski, working as Vinto.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinto-portfolio.pages.dev/gallery.html">
   <meta property="og:image" content="/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vinto's Portfolio">
+  <meta name="twitter:description" content="Concert and festival photography by Maciej Kowalski, working as Vinto.">
   <meta name="twitter:image" content="/og-image.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260511">
 </head>
 <body>
   <div class="controls-top">
-    <button id="portfolioButton" onclick="goToPage('index.html')">Portfolio</button>
-    <button id="aboutButton" onclick="toggleOverlay()">About</button>
-    <button id="indexButton" onclick="showGrid()">Index</button>
+    <button id="portfolioButton" onclick="goToPage('index.html')" aria-label="Back to portfolio index">Portfolio</button>
+    <button id="aboutButton" onclick="toggleOverlay()" aria-label="Show project information">About</button>
+    <button id="indexButton" onclick="showGrid()" aria-label="Return to gallery grid">Index</button>
   </div>
+  <p class="mobile-experience-note gallery-note">Simplified mobile view. Full experience is best on desktop.</p>
 
   <div class="gallery-grid"></div>
 
   <div class="fullscreen">
     <img src="" alt="Fullscreen Image">
+    <div class="gallery-counter" id="galleryCounter"></div>
   </div>
 
   <div class="controls-bottom">
-    <button id="whiteButton" onclick="changeBackgroundColor('#fff')">White Background</button>
-    <button id="blackButton" onclick="changeBackgroundColor('#000')">Black Background</button>
+    <button id="whiteButton" onclick="changeBackgroundColor('#fff')" aria-label="Use white background">White</button>
+    <button id="blackButton" onclick="changeBackgroundColor('#000')" aria-label="Use black background">Black</button>
   </div>
 
   <div class="overlay" id="overlay">
@@ -43,8 +51,7 @@
     </div>
   </div>
 
-  <script src="protect.js"></script>
-  <script src="events.js"></script>
-  <script src="gallery.js"></script>
+  <script src="events.js?v=20260511"></script>
+  <script src="gallery.js?v=20260511"></script>
 </body>
 </html>
