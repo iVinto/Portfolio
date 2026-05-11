@@ -31,7 +31,7 @@ const EVENTS = [
     preview: "3.webp",
     about: {
       title: "CLOUT FESTIVAL 4.0",
-      description: "Selected festival coverage created for CLOUT / BIG IDEA, focused on live performance, audience energy and the scale of the site.",
+      description: "Selected festival coverage created for CLOUT / BIG IDEA, focused on live performance, production scale and the site.",
       date: "11–12.07.2025",
       location: "Bemowo Airport, Warsaw, Poland"
     }
@@ -83,7 +83,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "KUQE 2115 — NARESZCIE W TRASIE VOL. 2",
-      description: "Tour documentation covering live performance, promotional moments and backstage atmosphere for the artist team.",
+      description: "Tour documentation covering live performance, promotional moments and backstage material for the artist team.",
       date: "11–12.2025",
       location: "Poland"
     }
@@ -100,7 +100,7 @@ const EVENTS = [
     preview: "4.webp",
     about: {
       title: "TRIPPIE REDD AT CLOUT FESTIVAL 3.0",
-      description: "Festival coverage created for CLOUT / BIG IDEA, focused on the show, crowd response and backstage rhythm.",
+      description: "Festival coverage created for CLOUT / BIG IDEA, focused on the show, staging and backstage rhythm.",
       date: "13.07.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -134,7 +134,7 @@ const EVENTS = [
     preview: "4.webp",
     about: {
       title: "YEAT AT ORANGE WARSAW FESTIVAL",
-      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and production context.",
       date: "08.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -151,7 +151,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "YUNGBLUD AT ORANGE WARSAW FESTIVAL",
-      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and production context.",
       date: "07.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -168,7 +168,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "KEN CARSON AT ORANGE WARSAW FESTIVAL",
-      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and crowd atmosphere.",
+      description: "Editorial festival coverage from Orange Warsaw Festival, centered on stage presence and production context.",
       date: "07.06.2024",
       location: "Tor Wyscigow Konnych Sluzewiec, Warsaw, Poland"
     }
@@ -185,7 +185,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "BAMBI IRL TOUR",
-      description: "A compact live story from the Warsaw stop of IRL Tour, focused on stage language, styling and fan energy.",
+      description: "A compact live story from the Warsaw stop of IRL Tour, focused on stage language, styling and lighting.",
       date: "12.04.2024",
       location: "Warsaw, Progresja"
     }
@@ -202,7 +202,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "YOUNG MULTI AT SBMFFESTIVAL 2023",
-      description: "Festival coverage from SBMFFestival 2023, built around performance dynamics and the summer crowd at Bemowo.",
+      description: "Festival coverage from SBMFFestival 2023, built around the live set and the summer setting at Bemowo.",
       date: "26.08.2023",
       location: "Warsaw, Bemowo Airport"
     }
@@ -240,7 +240,7 @@ const EVENTS = [
     preview: "5.webp",
     about: {
       title: "CLOUT FESTIVAL 2.0",
-      description: "Festival coverage created for CLOUT / BIG IDEA, focused on performances, site atmosphere and audience density.",
+      description: "Festival coverage created for CLOUT / BIG IDEA, focused on performances, site layout and production scale.",
       date: "08-09.07.2023",
       location: "Legia Stadion, Warsaw, Poland"
     }
@@ -274,7 +274,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "MATA TOUR GLIWICE",
-      description: "Tour documentation from the Gliwice finale, focused on production scale, stage design and crowd response.",
+      description: "Tour documentation from the Gliwice finale, focused on production scale, stage design and performance.",
       date: "28.01.2023",
       location: "Gliwice, Arena Gliwice"
     }
@@ -328,7 +328,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "WHITE 2115 PRETTY BOY TOUR",
-      description: "Outdoor concert coverage from Pretty Boy Tour, focused on the artist, crowd and late-summer stage atmosphere.",
+      description: "Outdoor concert coverage from Pretty Boy Tour, focused on the artist, staging and late-summer setting.",
       date: "16.09.2022",
       location: "Progresja, Warsaw"
     }
@@ -345,7 +345,7 @@ const EVENTS = [
     preview: "2.webp",
     about: {
       title: "JAKUB ON STAGE MEGA HIP-HOP TOUR",
-      description: "Concert coverage from Mega Hip-Hop Tour, built around local scale, stage movement and audience contact.",
+      description: "Concert coverage from Mega Hip-Hop Tour, built around local scale, stage movement and the outdoor setting.",
       date: "02.09.2022",
       location: "Zielonka, Poland"
     }
@@ -362,7 +362,7 @@ const EVENTS = [
     preview: "6.webp",
     about: {
       title: "BRACIA KACPERCZYK AT SBMFFESTIVAL 2022",
-      description: "Festival coverage from SBMFFestival 2022, focused on the band's live energy and open-air setting.",
+      description: "Festival coverage from SBMFFestival 2022, focused on the band's live set and open-air setting.",
       date: "25.08.2022",
       location: "Bemowo Airport, Warsaw"
     }
@@ -379,7 +379,7 @@ const EVENTS = [
     preview: "1.webp",
     about: {
       title: "MŁODY KLAKSON AT SBMFFESTIVAL 2022",
-      description: "Festival coverage from SBMFFestival 2022, focused on raw stage movement and the Bemowo crowd.",
+      description: "Festival coverage from SBMFFestival 2022, focused on raw stage movement and the Bemowo setting.",
       date: "26.08.2022",
       location: "Bemowo Airport, Warsaw"
     }
