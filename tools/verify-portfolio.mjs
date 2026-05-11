@@ -59,9 +59,9 @@ assert(!indexHtml.includes("editorials.html"), "Editorials should be hidden from
 assert(!indexHtml.includes("others.html"), "Others should be hidden from public navigation.");
 assert(!indexHtml.includes("mobileGate"), "Mobile should use a simplified responsive interface, not a blocking gate.");
 assert(indexHtml.includes("mobile-experience-note"), "Index needs the desktop-experience note for mobile visitors.");
-assert(indexHtml.includes("device.js?v=20260511e"), "Index should load phone detection before layout assets.");
-assert(indexHtml.includes("style.css?v=20260511e"), "Index should reference the latest stylesheet.");
-assert(indexHtml.includes("events.js?v=20260511e"), "Index should reference the latest event metadata.");
+assert(indexHtml.includes("device.js?v=20260511f"), "Index should load phone detection before layout assets.");
+assert(indexHtml.includes("style.css?v=20260511f"), "Index should reference the latest stylesheet.");
+assert(indexHtml.includes("events.js?v=20260511f"), "Index should reference the latest event metadata.");
 
 const galleryHtml = read("gallery.html");
 const galleryJs = read("gallery.js");
@@ -69,10 +69,10 @@ const styleCss = read("style.css");
 const deviceJs = read("device.js");
 assert(!galleryHtml.includes("protect.js"), "Gallery should not block saving or source shortcuts.");
 assert(galleryHtml.includes("mobile-experience-note"), "Gallery needs the desktop-experience note for mobile visitors.");
-assert(galleryHtml.includes("device.js?v=20260511e"), "Gallery should load phone detection before layout assets.");
-assert(galleryHtml.includes("style.css?v=20260511e"), "Gallery should reference the latest stylesheet.");
-assert(galleryHtml.includes("events.js?v=20260511e"), "Gallery should reference the latest event metadata.");
-assert(galleryHtml.includes("gallery.js?v=20260511e"), "Gallery should reference the latest gallery script.");
+assert(galleryHtml.includes("device.js?v=20260511f"), "Gallery should load phone detection before layout assets.");
+assert(galleryHtml.includes("style.css?v=20260511f"), "Gallery should reference the latest stylesheet.");
+assert(galleryHtml.includes("events.js?v=20260511f"), "Gallery should reference the latest event metadata.");
+assert(galleryHtml.includes("gallery.js?v=20260511f"), "Gallery should reference the latest gallery script.");
 assert(deviceJs.includes("phone-device"), "Phone detection should mark the document with a phone-device class.");
 assert(deviceJs.includes("navigator.maxTouchPoints"), "Phone detection should include touch capability.");
 assert(deviceJs.includes("(pointer: coarse)"), "Phone detection should include coarse pointer capability.");
@@ -124,6 +124,14 @@ assert(fs.existsSync(path.join(root, "robots.txt")), "robots.txt should exist.")
 assert(fs.existsSync(path.join(root, "sitemap.xml")), "sitemap.xml should exist.");
 
 const referenced = new Set();
+const strefaEvent = events.find(event => event.id === "2115-strefa57");
+assert(strefaEvent, "Hidden 2115 Strefa57 gallery should exist.");
+assert.equal(strefaEvent.hidden, true, "2115 Strefa57 gallery should stay hidden from the public index.");
+assert.equal(strefaEvent.columns, 3, "2115 Strefa57 gallery should render three photos per row.");
+assert.equal(strefaEvent.images.length, 15, "2115 Strefa57 gallery should include all 15 source photos.");
+assert.equal(strefaEvent.about.title, "2115 | Strefa57", "2115 Strefa57 title should follow the requested naming.");
+assert.equal(strefaEvent.about.date, "02.05.2026", "2115 Strefa57 date should match the published event date.");
+
 for (const event of events) {
   assert(event.about.description.trim(), `About description should not be empty for ${event.id}.`);
   assert(
@@ -157,5 +165,6 @@ assert.deepEqual(unused, [], `Unused images should be removed from Photography_w
 const sitemap = read("sitemap.xml");
 assert(sitemap.includes("<loc>https://vinto-portfolio.pages.dev/</loc>"), "Sitemap should include the production home URL.");
 assert(sitemap.includes("gallery.html?event=clout-festival-4"), "Sitemap should include gallery URLs.");
+assert(!sitemap.includes("2115-strefa57"), "Hidden 2115 Strefa57 gallery should not be listed in the sitemap.");
 
 console.log(`Portfolio verification passed for ${events.length} events and ${referenced.size} referenced images.`);

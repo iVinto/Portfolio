@@ -20,6 +20,24 @@
 
 const EVENTS = [
   {
+    id: "2115-strefa57",
+    title: "2115 | STREFA57",
+    year: 2026,
+    tags: ["CONCERT", "OUTDOOR", "POLAND"],
+    category: "concerts",
+    hidden: true,
+    folder: "Photography_web/2115Strefa57",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp", "15.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "2115 | Strefa57",
+      description: "Live documentation prepared for 2115 during the Strefa57 show.",
+      date: "02.05.2026",
+      location: "Strefa 57, Przytkowice, Poland"
+    }
+  },
+  {
     id: "clout-festival-4",
     title: "CLOUT FESTIVAL 4.0",
     year: 2025,
