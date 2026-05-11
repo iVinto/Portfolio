@@ -191,6 +191,11 @@
 
   function updateCounterPosition() {
     if (!isFullscreen) return;
+    if (document.documentElement.classList.contains("phone-device")) {
+      galleryCounter.style.left = "";
+      galleryCounter.style.top = "";
+      return;
+    }
     const rect = fullscreenImg.getBoundingClientRect();
     galleryCounter.style.left = `${Math.min(window.innerWidth - galleryCounter.offsetWidth - 12, rect.right + 12)}px`;
     galleryCounter.style.top = `${rect.bottom - galleryCounter.offsetHeight}px`;

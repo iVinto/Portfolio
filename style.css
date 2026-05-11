@@ -160,6 +160,15 @@ a:hover {
   opacity: 0.65;
 }
 
+.phone-device .filters {
+  display: none;
+}
+
+.phone-device .mobile-experience-note {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
 .wip-notice {
   font-size: 14px;
   padding-top: 1rem;
@@ -271,6 +280,15 @@ a:hover {
   color: inherit;
   background-color: inherit;
   padding: 0.25rem 0.5rem;
+}
+
+.phone-device .gallery-counter {
+  left: 50%;
+  top: auto;
+  bottom: 3.25rem;
+  translate: -50% 0;
+  background-color: transparent !important;
+  padding: 0;
 }
 
 .controls-top {
@@ -409,15 +427,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  .filters {
-    display: none;
-  }
-
-  .mobile-experience-note {
-    display: block;
-    margin-bottom: 1.25rem;
-  }
-
   .info-section {
     padding-top: 0;
   }

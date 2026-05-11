@@ -27,7 +27,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir cloudflare-dist
-          cp index.html gallery.html style.css events.js index-page.js gallery.js robots.txt sitemap.xml cloudflare-dist/
+          cp index.html gallery.html style.css device.js events.js index-page.js gallery.js robots.txt sitemap.xml cloudflare-dist/
           cp favicon.ico favicon-32x32.png apple-touch-icon.png og-image.png cloudflare-dist/
           cp -R Photography_web cloudflare-dist/
 

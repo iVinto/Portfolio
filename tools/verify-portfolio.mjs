@@ -59,12 +59,19 @@ assert(!indexHtml.includes("editorials.html"), "Editorials should be hidden from
 assert(!indexHtml.includes("others.html"), "Others should be hidden from public navigation.");
 assert(!indexHtml.includes("mobileGate"), "Mobile should use a simplified responsive interface, not a blocking gate.");
 assert(indexHtml.includes("mobile-experience-note"), "Index needs the desktop-experience note for mobile visitors.");
+assert(indexHtml.includes("device.js?v=20260511c"), "Index should load phone detection before layout assets.");
 
 const galleryHtml = read("gallery.html");
 const galleryJs = read("gallery.js");
 const styleCss = read("style.css");
+const deviceJs = read("device.js");
 assert(!galleryHtml.includes("protect.js"), "Gallery should not block saving or source shortcuts.");
 assert(galleryHtml.includes("mobile-experience-note"), "Gallery needs the desktop-experience note for mobile visitors.");
+assert(galleryHtml.includes("device.js?v=20260511c"), "Gallery should load phone detection before layout assets.");
+assert(deviceJs.includes("phone-device"), "Phone detection should mark the document with a phone-device class.");
+assert(deviceJs.includes("navigator.maxTouchPoints"), "Phone detection should include touch capability.");
+assert(deviceJs.includes("(pointer: coarse)"), "Phone detection should include coarse pointer capability.");
+assert(deviceJs.includes("Mobile") && deviceJs.includes("iPhone"), "Phone detection should include mobile user-agent signals.");
 assert(!/(\bimg|\bfullscreenImg)\.title\s*=/.test(galleryJs), "Gallery images should not set title attributes that create native cursor tooltips.");
 assert(!galleryJs.includes("dataset.caption"), "Gallery images should not carry redundant caption data.");
 assert(
@@ -81,12 +88,27 @@ assert(
   "Fullscreen click and cursor direction should use the rendered image halves, not the whole viewport."
 );
 assert(
+  galleryJs.includes('classList.contains("phone-device")') && galleryJs.includes('galleryCounter.style.left = ""') && galleryJs.includes('galleryCounter.style.top = ""'),
+  "Mobile gallery counter should hand positioning to CSS instead of staying beside the image."
+);
+assert(
   styleCss.includes("height: 34px;") && styleCss.includes("align-items: center;"),
   "Filter buttons should use a compact fixed height with centered text."
 );
 assert(!styleCss.includes("translateX(-50%)"), "Gallery counter should not be centered under the fullscreen image.");
 assert(styleCss.includes("white-space: nowrap;"), "Gallery counter should stay on one line.");
 assert(styleCss.includes("cursor-left") && styleCss.includes("cursor-right"), "Left/right fullscreen cursor classes should exist.");
+assert(styleCss.includes(".phone-device .filters"), "Mobile-only simplification should be gated by phone detection.");
+assert(styleCss.includes(".phone-device .mobile-experience-note"), "The desktop-experience note should show only for detected phones.");
+assert(styleCss.includes(".phone-device .gallery-counter"), "Phone gallery counter needs mobile-specific positioning.");
+assert(styleCss.includes("background-color: transparent !important"), "Phone gallery counter should not show a background patch.");
+assert(styleCss.includes("bottom: 3.25rem;"), "Phone gallery counter should move to the bottom.");
+assert(styleCss.includes("translate: -50% 0;"), "Phone gallery counter should be centered without using transform.");
+assert(
+  !/@media\s*\(max-width:\s*768px\)[\s\S]*?\.filters\s*\{[\s\S]*?display:\s*none;/.test(styleCss),
+  "Filters should not be hidden purely because the viewport is narrow."
+);
+assert(read(".github/workflows/cloudflare-pages.yml").includes("device.js"), "Cloudflare deploy should include device.js.");
 assert(fs.existsSync(path.join(root, "robots.txt")), "robots.txt should exist.");
 assert(fs.existsSync(path.join(root, "sitemap.xml")), "sitemap.xml should exist.");
 
