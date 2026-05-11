@@ -139,6 +139,7 @@
     document.body.style.backgroundColor = color;
     fullscreenDiv.style.backgroundColor = color;
     const isDark = color === "#000";
+    fullscreenDiv.classList.toggle("dark-background", isDark);
     overlay.style.backgroundColor = isDark ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)";
     document.body.style.color = isDark ? "#fff" : "#000";
 

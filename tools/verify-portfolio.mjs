@@ -59,7 +59,8 @@ assert(!indexHtml.includes("editorials.html"), "Editorials should be hidden from
 assert(!indexHtml.includes("others.html"), "Others should be hidden from public navigation.");
 assert(!indexHtml.includes("mobileGate"), "Mobile should use a simplified responsive interface, not a blocking gate.");
 assert(indexHtml.includes("mobile-experience-note"), "Index needs the desktop-experience note for mobile visitors.");
-assert(indexHtml.includes("device.js?v=20260511c"), "Index should load phone detection before layout assets.");
+assert(indexHtml.includes("device.js?v=20260511d"), "Index should load phone detection before layout assets.");
+assert(indexHtml.includes("style.css?v=20260511d"), "Index should reference the latest stylesheet.");
 
 const galleryHtml = read("gallery.html");
 const galleryJs = read("gallery.js");
@@ -67,7 +68,9 @@ const styleCss = read("style.css");
 const deviceJs = read("device.js");
 assert(!galleryHtml.includes("protect.js"), "Gallery should not block saving or source shortcuts.");
 assert(galleryHtml.includes("mobile-experience-note"), "Gallery needs the desktop-experience note for mobile visitors.");
-assert(galleryHtml.includes("device.js?v=20260511c"), "Gallery should load phone detection before layout assets.");
+assert(galleryHtml.includes("device.js?v=20260511d"), "Gallery should load phone detection before layout assets.");
+assert(galleryHtml.includes("style.css?v=20260511d"), "Gallery should reference the latest stylesheet.");
+assert(galleryHtml.includes("gallery.js?v=20260511d"), "Gallery should reference the latest gallery script.");
 assert(deviceJs.includes("phone-device"), "Phone detection should mark the document with a phone-device class.");
 assert(deviceJs.includes("navigator.maxTouchPoints"), "Phone detection should include touch capability.");
 assert(deviceJs.includes("(pointer: coarse)"), "Phone detection should include coarse pointer capability.");
@@ -83,6 +86,7 @@ assert(
   galleryJs.includes("function updateCursorDirection") && galleryJs.includes("cursor-left") && galleryJs.includes("cursor-right"),
   "Fullscreen navigation should update left/right cursor direction classes."
 );
+assert(galleryJs.includes("dark-background"), "Fullscreen should mark dark background for contrast-aware cursors.");
 assert(
   galleryJs.includes("rect.left + rect.width / 2") && !galleryJs.includes("window.innerWidth / 2"),
   "Fullscreen click and cursor direction should use the rendered image halves, not the whole viewport."
@@ -98,6 +102,11 @@ assert(
 assert(!styleCss.includes("translateX(-50%)"), "Gallery counter should not be centered under the fullscreen image.");
 assert(styleCss.includes("white-space: nowrap;"), "Gallery counter should stay on one line.");
 assert(styleCss.includes("cursor-left") && styleCss.includes("cursor-right"), "Left/right fullscreen cursor classes should exist.");
+assert(styleCss.includes("width='20'") && styleCss.includes("height='20'"), "Fullscreen cursor arrows should be half-size 20px symbols.");
+assert(!styleCss.includes("stroke-width='7'") && !styleCss.includes("stroke-width='3.5'"), "Fullscreen cursor arrows should not use the old outlined frame.");
+assert(styleCss.includes(".fullscreen.dark-background.cursor-left"), "Dark fullscreen should get white left cursor.");
+assert(styleCss.includes(".fullscreen.dark-background.cursor-right"), "Dark fullscreen should get white right cursor.");
+assert(styleCss.includes("stroke='white'") && styleCss.includes("stroke='black'"), "Cursor symbols should invert between black and white backgrounds.");
 assert(styleCss.includes(".phone-device .filters"), "Mobile-only simplification should be gated by phone detection.");
 assert(styleCss.includes(".phone-device .mobile-experience-note"), "The desktop-experience note should show only for detected phones.");
 assert(styleCss.includes(".phone-device .gallery-counter"), "Phone gallery counter needs mobile-specific positioning.");
