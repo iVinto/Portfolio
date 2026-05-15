@@ -38,6 +38,23 @@ const EVENTS = [
     }
   },
   {
+    id: "kuqe2115-nareszcie-w-trasie-vol2",
+    title: "KUQE 2115 / NARESZCIE W TRASIE VOL. 2",
+    year: 2025,
+    tags: ["CLUB", "CONCERT", "POLAND"],
+    category: "concerts",
+    folder: "Photography_web/kuqe2115_nareszcie_w_trasie_vol2",
+    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
+    columns: 3,
+    preview: "1.webp",
+    about: {
+      title: "KUQE 2115 — NARESZCIE W TRASIE VOL. 2",
+      description: "Tour documentation covering live performance, promotional moments and backstage material for the artist team.",
+      date: "11–12.2025",
+      location: "Poland"
+    }
+  },
+  {
     id: "clout-festival-4",
     title: "CLOUT FESTIVAL 4.0",
     year: 2025,
@@ -86,23 +103,6 @@ const EVENTS = [
       description: "Festival coverage prepared for Radio 357 during Open'er Festival 2025.",
       date: "05.07.2025",
       location: "Lotnisko Gdynia-Kosakowo, Gdynia, Poland"
-    }
-  },
-  {
-    id: "kuqe2115-nareszcie-w-trasie-vol2",
-    title: "KUQE 2115 / NARESZCIE W TRASIE VOL. 2",
-    year: 2025,
-    tags: ["CLUB", "CONCERT", "POLAND"],
-    category: "concerts",
-    folder: "Photography_web/kuqe2115_nareszcie_w_trasie_vol2",
-    images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp"],
-    columns: 3,
-    preview: "1.webp",
-    about: {
-      title: "KUQE 2115 — NARESZCIE W TRASIE VOL. 2",
-      description: "Tour documentation covering live performance, promotional moments and backstage material for the artist team.",
-      date: "11–12.2025",
-      location: "Poland"
     }
   },
   {
