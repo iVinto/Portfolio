@@ -120,7 +120,11 @@
     const dataEl = document.getElementById("photos");
     const dlg = document.querySelector("dialog.viewer");
     if (!dataEl || !dlg) return;
-    const photos = JSON.parse(dataEl.textContent);
+    const thumbs = [...document.querySelectorAll("a[data-i]")];
+    // The Selected grid is shuffled on every visit, so the viewer follows the order of the thumbnails on screen.
+    const data = JSON.parse(dataEl.textContent);
+    const photos = thumbs.length === data.length ? thumbs.map(a => data[Number(a.dataset.i)]) : data;
+    if (photos !== data) thumbs.forEach((a, k) => { a.dataset.i = k; });
     const track = dlg.querySelector(".v-track");
     const film = dlg.querySelector(".v-film");
     const countEl = dlg.querySelector(".v-count");
@@ -128,7 +132,6 @@
     const captionEl = dlg.querySelector(".v-caption");
     const prevBtn = dlg.querySelector(".v-prev"), nextBtn = dlg.querySelector(".v-next");
     const toast = dlg.querySelector(".v-toast");
-    const thumbs = [...document.querySelectorAll("a[data-i]")];
     const canMorph = () => typeof document.startViewTransition === "function" && !reduceMotion.matches;
     let built = false, index = 0, isOpen = false;
 

@@ -307,6 +307,14 @@ const img = (r, { sizes, alt, eager = false, high = false, small = false, full =
 <section class="sel" aria-label="Selected photographs">
 ${figs}
 </section>
+<script>
+/* a new order on every visit: runs before the first paint; the first photos load first and the viewer follows the order on screen */
+(() => {
+  const sel = document.querySelector(".sel"), figs = [...sel.children];
+  for (let i = figs.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [figs[i], figs[j]] = [figs[j], figs[i]]; }
+  figs.forEach((fig, k) => { const img = fig.querySelector("img"); img.loading = k < 3 ? "eager" : "lazy"; img.fetchPriority = k ? "auto" : "high"; sel.append(fig); });
+})();
+</script>
 </div>`;
   write("index.html", page({
     title: "Vinto — Concert & Festival Photographer, Warsaw",
