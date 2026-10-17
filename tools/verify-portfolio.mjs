@@ -1,4 +1,4 @@
-// Checks the built site in dist/ before deploy. Run after `npm run build` (CI does both).
+// Checks the built site in dist/ before deploy. Run after `npm run build` (Cloudflare Pages runs both on every push).
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
