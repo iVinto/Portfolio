@@ -3,7 +3,8 @@
  * =====================================
  * 12–20 strongest frames, mixed on purpose: stage, crowd, wide shot, detail.
  * Each entry points at an event id from events.js and one of its images.
- * The first entry is the hero: a bigger tile across the whole row on tablets and phones.
+ * The order below does not matter: the page shuffles the photos on every visit, and whichever comes first
+ * is the hero, a bigger tile across the whole row on tablets and phones.
  * Every photo is cropped to the same 4:5 tile, whatever its shape (horizontal and square ones too).
  *
  *   event    - id from events.js (hidden events are not allowed here)
