@@ -24,7 +24,7 @@ const SELECTED = [
   { event: "kuban-opener2025", image: "4.webp", caption: "Kuban / Open'er" },
   { event: "pierreroadtoclout", image: "3.webp", caption: "Pi'erre Bourne / Road to Clout" },
   { event: "mata-gliwice", image: "2.webp", caption: "Mata / Arena Gliwice" },
-  { event: "youngmulti-sbm2023", image: "3.webp", caption: "Young Multi / SBM" },
+  { event: "youngmulti-sbm2023", image: "1.webp", caption: "Young Multi / SBM" },
   { event: "trippie-redd-clout", image: "11.webp", caption: "Trippie Redd / Clout 3.0" },
   { event: "clout20", image: "5.webp", caption: "Clout Festival 2.0" },
   { event: "2115-strefa57", image: "3.webp", caption: "2115 / Strefa57" },
