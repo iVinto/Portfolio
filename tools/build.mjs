@@ -283,33 +283,16 @@ const img = (r, { sizes, alt, eager = false, high = false, small = false, full =
   `<img${cls ? ` class="${cls}"` : ""} src="${thumb(r, small && r.small ? SMALL : 480)}" srcset="${srcset(r, { small, full })}" sizes="${sizes}" width="${r.w}" height="${r.h}" alt="${esc(alt)}" ${eager ? 'loading="eager"' : 'loading="lazy"'} decoding="async"${high ? ' fetchpriority="high"' : ""}>`;
 
 // ---------- home: Selected ----------
-// Grid columns per layout: desktop 3, tablet 2, phone 2 (the first photo always takes the whole phone row).
-// A wide photo spans 2 columns; if the last row is not full, the last photo stretches across it. A photo that spans
-// columns gets a horizontal crop one row high (.x<layout><columns> classes in styles.css).
-const SEL_LAYOUTS = [{ key: "d", cols: 3 }, { key: "t", cols: 2 }, { key: "p", cols: 2, heroRow: true }];
-function selSpans({ cols, heroRow }) {
-  const spans = SELECTED.map((s, i) => heroRow && i === 0 ? cols : s.wide ? 2 : 1);
-  let col = 0;
-  spans.forEach((span, i) => {
-    if (col + span > cols) throw new Error(`selected.js: wide photo ${i + 1} would leave a hole in a ${cols}-column row; move it`);
-    col = (col + span) % cols;
-  });
-  if (col) spans[spans.length - 1] += cols - col;
-  return spans;
-}
+// Every photo gets the same 4:5 tile whatever its shape; `focus` in selected.js picks which part of the crop stays.
+// On tablets and phones the first photo is a bigger 4:5 tile across the whole row (styles.css).
 {
-  const spans = SEL_LAYOUTS.map(selSpans);
   const items = SELECTED.map((s, i) => {
     const e = byId.get(s.event), r = rec(`${e.folder}/${s.image}`);
     const caption = s.caption || e.title;
-    const [d, t, p] = spans.map(x => x[i]);
-    const plainHero = i === 0 && !s.wide; // full-width 4:5 hero on phones, set in styles.css
-    const cls = SEL_LAYOUTS.map((L, k) => spans[k][i] > 1 && !(L.heroRow && plainHero) ? `x${L.key}${spans[k][i]}` : "").filter(Boolean).join(" ");
-    const sizes = `(max-width: 760px) ${p * 50}vw, (max-width: 1100px) ${t * 40}vw, ${d * 300 + (d - 1) * 8}px`;
-    return { e, r, caption, i, cls, sizes, focus: s.focus };
+    return { e, r, caption, i, focus: s.focus };
   });
-  const figs = items.map(({ e, r, caption, i, cls, sizes, focus }) => `<figure${cls ? ` class="${cls}"` : ""}${focus ? ` style="--focus:${focus}"` : ""}>
-  <a class="ph" href="${src(r)}" data-i="${i}">${img(r, { sizes, alt: `${caption} — ${e.about?.date || e.year}`, eager: i < 3, high: i === 0 })}</a>
+  const figs = items.map(({ e, r, caption, i, focus }) => `<figure${focus ? ` style="--focus:${focus}"` : ""}>
+  <a class="ph" href="${src(r)}" data-i="${i}">${img(r, { sizes: i === 0 ? "(max-width: 760px) 100vw, (max-width: 1100px) 80vw, 300px" : "(max-width: 760px) 50vw, (max-width: 1100px) 40vw, 300px", alt: `${caption} — ${e.about?.date || e.year}`, eager: i < 3, high: i === 0 })}</a>
   <span class="pill glass-d">${esc(caption)}</span>
   <figcaption><a href="${pageOf(e)}">${esc(caption)}</a><span>${e.year}</span></figcaption>
 </figure>`).join("\n");

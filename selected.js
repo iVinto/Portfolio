@@ -3,18 +3,17 @@
  * =====================================
  * 12–20 strongest frames, mixed on purpose: stage, crowd, wide shot, detail.
  * Each entry points at an event id from events.js and one of its images.
- * The first entry is the full-width hero on phones.
- * Photos are cropped to 4:5. If the last row of the grid is not full, the build stretches the last photo across it.
+ * The first entry is the hero: a bigger tile across the whole row on tablets and phones.
+ * Every photo is cropped to the same 4:5 tile, whatever its shape (horizontal and square ones too).
  *
  *   event    - id from events.js (hidden events are not allowed here)
  *   image    - file name inside that event's folder. The number in the photo viewer ("6 / 9") is the photo's
  *              position in the gallery, which is not always its file name (Kuban's gallery runs 9.webp → 1.webp).
  *   caption  - short label under the photo (optional, defaults to the event title)
- *   wide     - true: horizontal crop, two columns wide (optional)
- *   focus    - which part of the photo the crop keeps, as CSS object-position (optional, default "50% 50%")
+ *   focus    - which part of the photo the 4:5 crop keeps, as CSS object-position (optional, default "50% 50%")
  */
 const SELECTED = [
-  { event: "trippie-redd-clout", image: "3.webp", caption: "Trippie Redd / Clout 3.0", wide: true, focus: "50% 5%" },
+  { event: "trippie-redd-clout", image: "3.webp", caption: "Trippie Redd / Clout 3.0" },
   { event: "fka-twigs-opener2025", image: "2.webp", caption: "FKA twigs / Open'er" },
   { event: "kuqe2115-nareszcie-w-trasie-vol2", image: "5.webp", caption: "Kuqe 2115 / Tour" },
   { event: "clout-festival-4", image: "8.webp", caption: "Clout Festival 4.0" },
