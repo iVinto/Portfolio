@@ -1,0 +1,13 @@
+{
+  "name": "vinto-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "vinto.work — static build: thumbnails, gallery pages, sitemap",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "verify": "node tools/verify-portfolio.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,182 +1,107 @@
+// Checks the built site in dist/ before deploy. Run after `npm run build` (CI does both).
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const allowedRootHtml = new Set(["index.html", "gallery.html"]);
-const expectedNonGalleryImages = new Set([
-  "Photography_web/vinto-portrait.webp",
-  "og-image.png",
-  "apple-touch-icon.png",
-  "favicon-32x32.png"
-]);
+const dist = path.join(root, "dist");
+const SITE = "https://vinto.work";
 
-function read(file) {
-  return fs.readFileSync(path.join(root, file), "utf8");
+function load(file, name) {
+  const ctx = {};
+  vm.createContext(ctx);
+  vm.runInContext(`${fs.readFileSync(path.join(root, file), "utf8")}\nthis.${name} = ${name};`, ctx);
+  return ctx[name];
 }
+const eventsArg = process.argv.indexOf("--events");
+const EVENTS = load(eventsArg >= 0 ? path.relative(root, path.resolve(process.argv[eventsArg + 1])) : "events.js", "EVENTS");
+const SELECTED = load("selected.js", "SELECTED");
+const read = rel => fs.readFileSync(path.join(dist, rel), "utf8");
+const exists = rel => fs.existsSync(path.join(dist, rel));
+const isListed = e => e.category === "concerts" && !e.hidden;
+const listed = EVENTS.filter(isListed);
+const unlisted = EVENTS.filter(e => !isListed(e));
 
-function walk(dir) {
-  const entries = [];
-  for (const entry of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
-    const rel = path.join(dir, entry.name);
-    if (entry.isDirectory()) entries.push(...walk(rel));
-    else entries.push(rel);
+assert(fs.existsSync(dist), "dist/ is missing — run `npm run build` first.");
+for (const f of ["index.html", "work/index.html", "about/index.html", "404.html", "gallery.html", "robots.txt", "sitemap.xml", "_headers", "assets/styles.css", "assets/site.js", "og-image.png", "favicon.svg"]) {
+  assert(exists(f), `Missing from the build: ${f}`);
+}
+assert(!exists("events.js"), "events.js must not be deployed: it lists hidden galleries.");
+
+// Every page: title, canonical and absolute link-preview image on vinto.work; no leftovers of the old mobile note.
+const pages = [];
+(function walk(dir) {
+  for (const f of fs.readdirSync(path.join(dist, dir), { withFileTypes: true })) {
+    const rel = path.join(dir, f.name);
+    if (f.isDirectory()) walk(rel);
+    else if (f.name.endsWith(".html") && rel !== "gallery.html") pages.push(rel);
   }
-  return entries;
+})("");
+for (const rel of pages) {
+  const html = read(rel);
+  assert(/<title>[^<]+<\/title>/.test(html), `${rel}: missing <title>`);
+  assert(html.includes(`<link rel="canonical" href="${SITE}/`), `${rel}: canonical must point to ${SITE}`);
+  assert(new RegExp(`<meta property="og:image" content="${SITE}/`).test(html), `${rel}: og:image must be an absolute ${SITE} URL`);
+  assert(!html.includes("Simplified mobile view"), `${rel}: the old mobile disclaimer is back`);
+  // every local file the page points at must exist in the build
+  for (const [, url] of html.matchAll(/(?:src|href)="(\/[^"#]*)"/g)) {
+    const clean = decodeURIComponent(url.split("?")[0]);
+    const target = clean.endsWith("/") ? `${clean}index.html` : clean;
+    assert(exists(target), `${rel}: broken local link ${url}`);
+  }
+  for (const [, set] of html.matchAll(/srcset="([^"]+)"/g)) {
+    for (const part of set.split(",")) {
+      const url = part.trim().split(/\s+/)[0];
+      assert(exists(decodeURIComponent(url.split("?")[0])), `${rel}: srcset file missing ${url}`);
+    }
+  }
 }
 
-function loadEvents() {
-  const context = {};
-  vm.createContext(context);
-  vm.runInContext(`${read("events.js")}\nthis.EVENTS = EVENTS;`, context);
-  return context.EVENTS;
+// Galleries: public ones are listed and in the sitemap; hidden ones get a noindex page and appear nowhere else.
+const indexHtml = read("work/index.html"), homeHtml = read("index.html"), sitemap = read("sitemap.xml");
+for (const e of listed) {
+  assert(exists(`work/${e.id}/index.html`) && exists(`work/${e.id}/og.jpg`), `Public gallery ${e.id} has no page or link preview`);
+  assert(indexHtml.includes(`href="/work/${e.id}/"`), `Public gallery ${e.id} is missing from the Index`);
+  assert(sitemap.includes(`${SITE}/work/${e.id}/`), `Public gallery ${e.id} is missing from the sitemap`);
+  const page = read(`work/${e.id}/index.html`);
+  assert(!page.includes('name="robots" content="noindex"'), `Public gallery ${e.id} must be indexable`);
+  const photos = JSON.parse(page.match(/<script type="application\/json" id="photos">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(photos.length, e.images.length, `${e.id}: viewer data should list every photo`);
+}
+for (const e of unlisted) {
+  const page = read(`work/${e.id}/index.html`);
+  assert(page.includes('name="robots" content="noindex"'), `Unlisted gallery ${e.id} must be noindex`);
+  for (const [name, html] of [["Index", indexHtml], ["home", homeHtml], ["sitemap", sitemap]]) {
+    assert(!html.includes(`/work/${e.id}/`), `Unlisted gallery ${e.id} leaks into the ${name}`);
+  }
+}
+assert.equal((homeHtml.match(/data-i="/g) || []).length, SELECTED.length, "Home should show every Selected photo");
+
+// Source photos: present, at most 2200 px on the long edge, descriptions written for every event.
+for (const e of EVENTS) {
+  assert(e.about?.description?.trim(), `About description should not be empty for ${e.id}.`);
+  for (const img of new Set([...e.images, e.preview])) {
+    const rel = path.join(e.folder, img);
+    assert(fs.existsSync(path.join(root, rel)), `Referenced image missing: ${rel}`);
+    const { width, height } = await sharp(path.join(root, rel)).metadata();
+    assert(Math.max(width, height) <= 2200, `Referenced image exceeds 2200 px on the long edge: ${rel} (${width}x${height})`);
+  }
 }
 
-function imageDimensions(relPath) {
-  const output = execFileSync("sips", ["-g", "pixelWidth", "-g", "pixelHeight", path.join(root, relPath)], {
-    encoding: "utf8"
-  });
-  const width = Number(output.match(/pixelWidth:\s+(\d+)/)?.[1]);
-  const height = Number(output.match(/pixelHeight:\s+(\d+)/)?.[1]);
-  if (!width || !height) throw new Error(`Could not read image dimensions for ${relPath}`);
-  return { width, height };
-}
+// Not fatal: photos in Photography_web that no gallery uses are simply not deployed.
+const used = new Set(EVENTS.flatMap(e => [...e.images, e.preview].map(i => path.join(e.folder, i))));
+used.add("Photography_web/vinto-portrait.webp");
+const unused = [];
+(function walk(dir) {
+  for (const f of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
+    const rel = path.join(dir, f.name);
+    if (f.isDirectory()) walk(rel);
+    else if (/\.(avif|jpe?g|png|webp)$/i.test(f.name) && !used.has(rel)) unused.push(rel);
+  }
+})("Photography_web");
+if (unused.length) console.warn(`Note: ${unused.length} photo(s) in Photography_web are not used by any gallery: ${unused.join(", ")}`);
 
-const events = loadEvents();
-
-const rootHtml = fs.readdirSync(root).filter(file => file.endsWith(".html"));
-assert.deepEqual(
-  rootHtml.sort(),
-  [...allowedRootHtml].sort(),
-  "Only the canonical index and gallery HTML files should be deployed from the root."
-);
-
-const indexHtml = read("index.html");
-assert(!indexHtml.includes("editorials.html"), "Editorials should be hidden from public navigation.");
-assert(!indexHtml.includes("others.html"), "Others should be hidden from public navigation.");
-assert(!indexHtml.includes("mobileGate"), "Mobile should use a simplified responsive interface, not a blocking gate.");
-assert(indexHtml.includes("mobile-experience-note"), "Index needs the desktop-experience note for mobile visitors.");
-assert(indexHtml.includes('href="favicon.svg?v=20260511g"'), "Index should use the simple v SVG favicon.");
-assert(indexHtml.includes("device.js?v=20260511g"), "Index should load phone detection before layout assets.");
-assert(indexHtml.includes("style.css?v=20260511g"), "Index should reference the latest stylesheet.");
-assert(indexHtml.includes("events.js?v=20260511g"), "Index should reference the latest event metadata.");
-
-const galleryHtml = read("gallery.html");
-const galleryJs = read("gallery.js");
-const styleCss = read("style.css");
-const deviceJs = read("device.js");
-const faviconSvg = read("favicon.svg");
-assert(!galleryHtml.includes("protect.js"), "Gallery should not block saving or source shortcuts.");
-assert(galleryHtml.includes("mobile-experience-note"), "Gallery needs the desktop-experience note for mobile visitors.");
-assert(galleryHtml.includes('href="favicon.svg?v=20260511g"'), "Gallery should use the simple v SVG favicon.");
-assert(galleryHtml.includes("device.js?v=20260511g"), "Gallery should load phone detection before layout assets.");
-assert(galleryHtml.includes("style.css?v=20260511g"), "Gallery should reference the latest stylesheet.");
-assert(galleryHtml.includes("events.js?v=20260511g"), "Gallery should reference the latest event metadata.");
-assert(galleryHtml.includes("gallery.js?v=20260511g"), "Gallery should reference the latest gallery script.");
-assert(faviconSvg.includes(">v<"), "SVG favicon should be a plain lowercase v.");
-assert(read(".github/workflows/cloudflare-pages.yml").includes("favicon.svg"), "Cloudflare deploy should include favicon.svg.");
-assert(deviceJs.includes("phone-device"), "Phone detection should mark the document with a phone-device class.");
-assert(deviceJs.includes("navigator.maxTouchPoints"), "Phone detection should include touch capability.");
-assert(deviceJs.includes("(pointer: coarse)"), "Phone detection should include coarse pointer capability.");
-assert(deviceJs.includes("Mobile") && deviceJs.includes("iPhone"), "Phone detection should include mobile user-agent signals.");
-assert(!/(\bimg|\bfullscreenImg)\.title\s*=/.test(galleryJs), "Gallery images should not set title attributes that create native cursor tooltips.");
-assert(!galleryJs.includes("dataset.caption"), "Gallery images should not carry redundant caption data.");
-assert(
-  galleryJs.includes("function updateCounterPosition()") && galleryJs.includes("fullscreenImg.getBoundingClientRect()"),
-  "Fullscreen counter should be positioned from the rendered image bounds."
-);
-assert(galleryJs.includes("galleryCounter.offsetWidth"), "Fullscreen counter positioning should account for its rendered width.");
-assert(
-  galleryJs.includes("function updateCursorDirection") && galleryJs.includes("cursor-left") && galleryJs.includes("cursor-right"),
-  "Fullscreen navigation should update left/right cursor direction classes."
-);
-assert(galleryJs.includes("dark-background"), "Fullscreen should mark dark background for contrast-aware cursors.");
-assert(
-  galleryJs.includes("rect.left + rect.width / 2") && !galleryJs.includes("window.innerWidth / 2"),
-  "Fullscreen click and cursor direction should use the rendered image halves, not the whole viewport."
-);
-assert(
-  galleryJs.includes('classList.contains("phone-device")') && galleryJs.includes('galleryCounter.style.left = ""') && galleryJs.includes('galleryCounter.style.top = ""'),
-  "Mobile gallery counter should hand positioning to CSS instead of staying beside the image."
-);
-assert(
-  styleCss.includes("height: 34px;") && styleCss.includes("align-items: center;"),
-  "Filter buttons should use a compact fixed height with centered text."
-);
-assert(!styleCss.includes("translateX(-50%)"), "Gallery counter should not be centered under the fullscreen image.");
-assert(styleCss.includes("white-space: nowrap;"), "Gallery counter should stay on one line.");
-assert(styleCss.includes("cursor-left") && styleCss.includes("cursor-right"), "Left/right fullscreen cursor classes should exist.");
-assert(styleCss.includes("width='20'") && styleCss.includes("height='20'"), "Fullscreen cursor arrows should be half-size 20px symbols.");
-assert(!styleCss.includes("stroke-width='7'") && !styleCss.includes("stroke-width='3.5'"), "Fullscreen cursor arrows should not use the old outlined frame.");
-assert(styleCss.includes(".fullscreen.dark-background.cursor-left"), "Dark fullscreen should get white left cursor.");
-assert(styleCss.includes(".fullscreen.dark-background.cursor-right"), "Dark fullscreen should get white right cursor.");
-assert(styleCss.includes("stroke='white'") && styleCss.includes("stroke='black'"), "Cursor symbols should invert between black and white backgrounds.");
-assert(styleCss.includes(".phone-device .filters"), "Mobile-only simplification should be gated by phone detection.");
-assert(styleCss.includes(".phone-device .mobile-experience-note"), "The desktop-experience note should show only for detected phones.");
-assert(styleCss.includes(".phone-device .gallery-counter"), "Phone gallery counter needs mobile-specific positioning.");
-assert(styleCss.includes("background-color: transparent !important"), "Phone gallery counter should not show a background patch.");
-assert(styleCss.includes("bottom: 3.25rem;"), "Phone gallery counter should move to the bottom.");
-assert(styleCss.includes("translate: -50% 0;"), "Phone gallery counter should be centered without using transform.");
-assert(
-  !/@media\s*\(max-width:\s*768px\)[\s\S]*?\.filters\s*\{[\s\S]*?display:\s*none;/.test(styleCss),
-  "Filters should not be hidden purely because the viewport is narrow."
-);
-assert(read(".github/workflows/cloudflare-pages.yml").includes("device.js"), "Cloudflare deploy should include device.js.");
-assert(fs.existsSync(path.join(root, "robots.txt")), "robots.txt should exist.");
-assert(fs.existsSync(path.join(root, "sitemap.xml")), "sitemap.xml should exist.");
-
-const referenced = new Set();
-const strefaEvent = events.find(event => event.id === "2115-strefa57");
-assert(strefaEvent, "Hidden 2115 Strefa57 gallery should exist.");
-assert.equal(strefaEvent.hidden, true, "2115 Strefa57 gallery should stay hidden from the public index.");
-assert.equal(strefaEvent.columns, 3, "2115 Strefa57 gallery should render three photos per row.");
-assert.equal(strefaEvent.images.length, 15, "2115 Strefa57 gallery should include all 15 source photos.");
-assert.equal(strefaEvent.about.title, "2115 | Strefa57", "2115 Strefa57 title should follow the requested naming.");
-assert.equal(strefaEvent.about.date, "02.05.2026", "2115 Strefa57 date should match the published event date.");
-
-const mataBemowoEvent = events.find(event => event.id === "mata-bemowo");
-assert(mataBemowoEvent, "MATA Bemowo event should exist.");
-assert.equal(mataBemowoEvent.folder, "Photography_web/MataBemowo", "MATA Bemowo should use the regenerated web folder.");
-assert.equal(mataBemowoEvent.images.join(","), "1.webp,2.webp,3.webp,4.webp,5.webp", "MATA Bemowo should reference regenerated WebP files.");
-assert.deepEqual(imageDimensions("Photography_web/MataBemowo/1.webp"), { width: 1760, height: 2200 }, "MATA Bemowo portrait image should be regenerated at 2200 px long edge.");
-assert.deepEqual(imageDimensions("Photography_web/MataBemowo/4.webp"), { width: 2200, height: 1760 }, "MATA Bemowo landscape image should be regenerated at 2200 px long edge.");
-
-for (const event of events) {
-  assert(event.about.description.trim(), `About description should not be empty for ${event.id}.`);
-  assert(
-    !/(personal project|experimental personal project|photo relation|media team work|work for)/i.test(event.about.description),
-    `About description should be specific and polished for ${event.id}: ${event.about.description}`
-  );
-  assert(
-    !/(audience|crowd|fan|public|publik|dynam|energy|response|atmosphere)/i.test(event.about.description),
-    `About description should avoid audience/crowd references for ${event.id}: ${event.about.description}`
-  );
-  for (const image of event.images) referenced.add(path.join(event.folder, image));
-  referenced.add(path.join(event.folder, event.preview));
-}
-
-for (const relPath of referenced) {
-  assert(fs.existsSync(path.join(root, relPath)), `Referenced image missing: ${relPath}`);
-  const { width, height } = imageDimensions(relPath);
-  assert(
-    Math.max(width, height) <= 2200,
-    `Referenced image exceeds 2200 px on the long edge: ${relPath} (${width}x${height})`
-  );
-}
-
-const deployImages = walk("Photography_web")
-  .filter(file => /\.(avif|gif|jpe?g|png|webp)$/i.test(file))
-  .filter(file => !expectedNonGalleryImages.has(file));
-
-const unused = deployImages.filter(file => !referenced.has(file));
-assert.deepEqual(unused, [], `Unused images should be removed from Photography_web: ${unused.join(", ")}`);
-
-const sitemap = read("sitemap.xml");
-assert(sitemap.includes("<loc>https://vinto-portfolio.pages.dev/</loc>"), "Sitemap should include the production home URL.");
-assert(sitemap.includes("gallery.html?event=clout-festival-4"), "Sitemap should include gallery URLs.");
-assert(!sitemap.includes("2115-strefa57"), "Hidden 2115 Strefa57 gallery should not be listed in the sitemap.");
-
-console.log(`Portfolio verification passed for ${events.length} events and ${referenced.size} referenced images.`);
+console.log(`Build verified: ${pages.length} pages, ${listed.length} public + ${unlisted.length} unlisted galleries, ${SELECTED.length} selected photos.`);

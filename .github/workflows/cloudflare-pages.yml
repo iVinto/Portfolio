@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   deploy:
-    name: Deploy to Cloudflare Pages
+    name: Build and deploy to Cloudflare Pages
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -24,12 +24,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Prepare static site
-        run: |
-          mkdir cloudflare-dist
-          cp index.html gallery.html style.css device.js events.js index-page.js gallery.js robots.txt sitemap.xml cloudflare-dist/
-          cp favicon.svg favicon.ico favicon-32x32.png apple-touch-icon.png og-image.png cloudflare-dist/
-          cp -R Photography_web cloudflare-dist/
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install build tools
+        run: npm ci
+
+      # Thumbnails and link previews are cached by content hash, so only new or edited photos are processed.
+      - name: Restore image cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: images-${{ hashFiles('tools/build.mjs') }}-${{ hashFiles('Photography_web/**') }}
+          restore-keys: |
+            images-${{ hashFiles('tools/build.mjs') }}-
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify build
+        run: npm run verify
 
       - name: Deploy
         if: env.CLOUDFLARE_ACCOUNT_ID != '' && env.CLOUDFLARE_API_TOKEN != ''
@@ -37,7 +54,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy cloudflare-dist --project-name=vinto-portfolio --branch=main --commit-dirty=false
+          command: pages deploy dist --project-name=vinto-portfolio --branch=main --commit-dirty=false
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Skip deploy without Cloudflare secrets
