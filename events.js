@@ -25,7 +25,6 @@ const EVENTS = [
     year: 2026,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     category: "concerts",
-    hidden: true,
     folder: "Photography_web/2115Strefa57",
     images: ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp", "9.webp", "10.webp", "11.webp", "12.webp", "13.webp", "14.webp", "15.webp"],
     columns: 3,
