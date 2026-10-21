@@ -38,7 +38,7 @@ const EVENTS = [
   },
   {
     id: "kuqe2115-nareszcie-w-trasie-vol2",
-    title: "KUQE 2115 / NARESZCIE W TRASIE VOL. 2",
+    title: "KUQE 2115 | NARESZCIE W TRASIE VOL. 2",
     year: 2025,
     tags: ["CLUB", "CONCERT", "POLAND"],
     category: "concerts",
@@ -72,7 +72,7 @@ const EVENTS = [
   },
   {
     id: "fka-twigs-opener2025",
-    title: "FKA TWIGS / OPEN'ER FESTIVAL 2025",
+    title: "FKA TWIGS | OPEN'ER FESTIVAL 2025",
     year: 2025,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     category: "concerts",
@@ -89,7 +89,7 @@ const EVENTS = [
   },
   {
     id: "kuban-opener2025",
-    title: "KUBAN / OPEN'ER FESTIVAL 2025",
+    title: "KUBAN | OPEN'ER FESTIVAL 2025",
     year: 2025,
     tags: ["OUTDOOR", "FESTIVAL", "POLAND"],
     category: "concerts",
@@ -106,7 +106,7 @@ const EVENTS = [
   },
   {
     id: "trippie-redd-clout",
-    title: "TRIPPIE REDD / CLOUT FESTIVAL 3.0",
+    title: "TRIPPIE REDD | CLOUT FESTIVAL 3.0",
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     category: "concerts",
@@ -123,7 +123,7 @@ const EVENTS = [
   },
   {
     id: "poland-portugal-porto",
-    title: "POLAND - PORTUGAL / PORTO",
+    title: "POLAND - PORTUGAL | PORTO",
     year: 2024,
     tags: [],
     category: "others",
@@ -140,7 +140,7 @@ const EVENTS = [
   },
   {
     id: "owf-yeat",
-    title: "YEAT / ORANGE WARSAW FESTIVAL",
+    title: "YEAT | ORANGE WARSAW FESTIVAL",
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     category: "concerts",
@@ -157,7 +157,7 @@ const EVENTS = [
   },
   {
     id: "owf-yungblud",
-    title: "YUNGBLUD / ORANGE WARSAW FESTIVAL",
+    title: "YUNGBLUD | ORANGE WARSAW FESTIVAL",
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     category: "concerts",
@@ -174,7 +174,7 @@ const EVENTS = [
   },
   {
     id: "owf-kencarson",
-    title: "KEN CARSON / ORANGE WARSAW FESTIVAL",
+    title: "KEN CARSON | ORANGE WARSAW FESTIVAL",
     year: 2024,
     tags: ["OUTDOOR", "FESTIVAL", "FOREIGN"],
     category: "concerts",
@@ -191,7 +191,7 @@ const EVENTS = [
   },
   {
     id: "bambi-irl-tour",
-    title: "BAMBI / IRL TOUR WARSAW",
+    title: "BAMBI | IRL TOUR WARSAW",
     year: 2024,
     tags: ["CLUB", "CONCERT", "POLAND"],
     category: "concerts",
@@ -208,7 +208,7 @@ const EVENTS = [
   },
   {
     id: "youngmulti-sbm2023",
-    title: "YOUNG MULTI / SBMFFESTIVAL 2023",
+    title: "YOUNG MULTI | SBMFFESTIVAL 2023",
     year: 2023,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -263,7 +263,7 @@ const EVENTS = [
   },
   {
     id: "zabson-ostatniziomal",
-    title: "ŻABSON / OSTATNI ZIOMAL TOUR WARSAW",
+    title: "ŻABSON | OSTATNI ZIOMAL TOUR WARSAW",
     year: 2023,
     tags: ["CONCERT", "ARENA", "POLAND"],
     category: "concerts",
@@ -280,7 +280,7 @@ const EVENTS = [
   },
   {
     id: "mata-gliwice",
-    title: "MATA / MATA TOUR GLIWICE",
+    title: "MATA | MATA TOUR GLIWICE",
     year: 2023,
     tags: ["CONCERT", "ARENA", "POLAND"],
     category: "concerts",
@@ -297,7 +297,7 @@ const EVENTS = [
   },
   {
     id: "pierreroadtoclout",
-    title: "PI'ERRE BOURNE / ROAD TO CLOUT",
+    title: "PI'ERRE BOURNE | ROAD TO CLOUT",
     year: 2022,
     tags: ["CLUB", "CONCERT", "FOREIGN"],
     category: "concerts",
@@ -314,7 +314,7 @@ const EVENTS = [
   },
   {
     id: "mata-tour",
-    title: "MATA / MATA TOUR :)",
+    title: "MATA | MATA TOUR :)",
     year: 2022,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -334,7 +334,7 @@ const EVENTS = [
   },
   {
     id: "white2115prettyboyour",
-    title: "WHITE 2115 / PRETTY BOY TOUR",
+    title: "WHITE 2115 | PRETTY BOY TOUR",
     year: 2022,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -351,7 +351,7 @@ const EVENTS = [
   },
   {
     id: "jakubonstagamegahiphoptour",
-    title: "JAKUB ON STAGE / MEGA HIP-HOP TOUR",
+    title: "JAKUB ON STAGE | MEGA HIP-HOP TOUR",
     year: 2022,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -368,7 +368,7 @@ const EVENTS = [
   },
   {
     id: "kacperczyksbm2022",
-    title: "BRACIA KACPERCZYK / SBM 2022",
+    title: "BRACIA KACPERCZYK | SBM 2022",
     year: 2022,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -385,7 +385,7 @@ const EVENTS = [
   },
   {
     id: "klaksonsbm2022",
-    title: "MŁODY KLAKSON / SBM 2022",
+    title: "MŁODY KLAKSON | SBM 2022",
     year: 2022,
     tags: ["FESTIVAL", "OUTDOOR", "POLAND"],
     category: "concerts",
@@ -402,7 +402,7 @@ const EVENTS = [
   },
   {
     id: "mata-bemowo",
-    title: "MATA / BEMOWO",
+    title: "MATA | BEMOWO",
     year: 2021,
     tags: ["CONCERT", "OUTDOOR", "POLAND"],
     category: "concerts",
