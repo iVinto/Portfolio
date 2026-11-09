@@ -143,6 +143,9 @@ main { padding: var(--top) var(--pad) 0; }
 }
 
 /* ---------- footer ---------- */
+/* About is shorter than the screen: the page is a full-height column, so the footer sits on the bottom edge. */
+.pg-about { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+.pg-about main { flex: 1 0 auto; }
 .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 120px var(--pad) 40px; }
 .foot .wm { font-size: clamp(72px, 11.7vw, 168px); }
 .foot nav { display: flex; flex-wrap: wrap; gap: 8px 28px; padding-bottom: 14px; }

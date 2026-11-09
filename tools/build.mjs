@@ -237,7 +237,7 @@ ${noindex ? '<meta name="robots" content="noindex">\n' : ""}<meta property="og:t
 <link rel="stylesheet" href="/assets/styles.css?v=${assetHash["styles.css"]}">
 <script src="/assets/site.js?v=${assetHash["site.js"]}" defer></script>
 </head>
-<body>
+<body${section ? ` class="pg-${section}"` : ""}>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="wm" href="/" aria-label="${esc(C.brand)} — home">${esc(C.brand)}</a>
